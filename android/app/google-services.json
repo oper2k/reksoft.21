@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "179260844620",
+    "project_id": "reksoft-21-46uzyi",
+    "storage_bucket": "reksoft-21-46uzyi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179260844620:android:71b6f78524fa738ed322e9",
+        "android_client_info": {
+          "package_name": "com.mycompany.reksoft21"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhte-1IUOyj_JjzDvcUrq95tcvcHuIQ_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
