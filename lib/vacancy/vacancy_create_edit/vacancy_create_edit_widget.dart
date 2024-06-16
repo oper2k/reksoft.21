@@ -8,7 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
@@ -112,6 +112,10 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
         TextEditingController(text: widget.vacancyDraft?.salaryMax?.toString());
     _model.salaryMaxFocusNode ??= FocusNode();
 
+    _model.conditionsFieldTextController ??=
+        TextEditingController(text: widget.vacancyDraft?.workingConditions);
+    _model.conditionsFieldFocusNode ??= FocusNode();
+
     _model.linkFieldTextController ??=
         TextEditingController(text: widget.vacancyDraft?.testTaskLink);
     _model.linkFieldFocusNode ??= FocusNode();
@@ -173,9 +177,9 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                         ),
                       ),
                       wrapWithModel(
-                        model: _model.headerMobileModel,
+                        model: _model.headerMobileOpenModel,
                         updateCallback: () => setState(() {}),
-                        child: HeaderMobileWidget(
+                        child: HeaderMobileOpenWidget(
                           currentPage: 2,
                         ),
                       ),
@@ -538,7 +542,6 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                         TextInputAction.next,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      hintText: 'Должность',
                                                       hintStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -885,8 +888,6 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                     autofocus: false,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          'Полное описание вакансии длиной в несколько строк полное описание вакансии длиной в несколько строк Полное описание вакансии длиной в несколько строк полное описание вакансии длиной в несколько строк \n\n-Полное описание вакансии длиной в несколько строк полное описание вакансии длиной в несколько строк',
                                                       hintStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -965,8 +966,8 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   20.0,
+                                                                  40.0,
                                                                   20.0,
-                                                                  0.0,
                                                                   0.0),
                                                     ),
                                                     style: FlutterFlowTheme.of(
@@ -989,7 +990,7 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                                       .bodyMediumFamily),
                                                         ),
                                                     textAlign: TextAlign.start,
-                                                    maxLines: null,
+                                                    maxLines: 5,
                                                     minLines: 5,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
@@ -1089,8 +1090,6 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                     autofocus: false,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          'Полное описание вакансии длиной в несколько строк полное описание вакансии длиной в несколько строк Полное описание вакансии длиной в несколько строк полное описание вакансии длиной в несколько строк \n\n-Полное описание вакансии длиной в несколько строк полное описание вакансии длиной в несколько строк',
                                                       hintStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1169,8 +1168,8 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   20.0,
+                                                                  40.0,
                                                                   20.0,
-                                                                  0.0,
                                                                   0.0),
                                                     ),
                                                     style: FlutterFlowTheme.of(
@@ -1193,7 +1192,7 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                                       .bodyMediumFamily),
                                                         ),
                                                     textAlign: TextAlign.start,
-                                                    maxLines: null,
+                                                    maxLines: 5,
                                                     minLines: 5,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
@@ -1430,102 +1429,104 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                                       context),
                                                             ),
                                                           ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        20.0,
-                                                                        13.0,
-                                                                        20.0,
-                                                                        13.0),
-                                                            child: Builder(
-                                                              builder:
-                                                                  (context) {
-                                                                final skill =
-                                                                    _model
-                                                                        .skills
-                                                                        .toList();
-                                                                return Wrap(
-                                                                  spacing: 10.0,
-                                                                  runSpacing:
-                                                                      10.0,
-                                                                  alignment:
-                                                                      WrapAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      WrapCrossAlignment
-                                                                          .start,
-                                                                  direction: Axis
-                                                                      .horizontal,
-                                                                  runAlignment:
-                                                                      WrapAlignment
-                                                                          .start,
-                                                                  verticalDirection:
-                                                                      VerticalDirection
-                                                                          .down,
-                                                                  clipBehavior:
-                                                                      Clip.none,
-                                                                  children: List
-                                                                      .generate(
-                                                                          skill
-                                                                              .length,
-                                                                          (skillIndex) {
-                                                                    final skillItem =
-                                                                        skill[
-                                                                            skillIndex];
-                                                                    return Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .lightGray1,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10.0),
-                                                                      ),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            18.0,
-                                                                            12.0,
-                                                                            18.0,
-                                                                            12.0),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.min,
-                                                                          children: [
-                                                                            InkWell(
-                                                                              splashColor: Colors.transparent,
-                                                                              focusColor: Colors.transparent,
-                                                                              hoverColor: Colors.transparent,
-                                                                              highlightColor: Colors.transparent,
-                                                                              onTap: () async {
-                                                                                _model.removeAtIndexFromSkills(skillIndex);
-                                                                                setState(() {});
-                                                                              },
-                                                                              child: Icon(
-                                                                                Icons.close,
-                                                                                color: FlutterFlowTheme.of(context).gray,
-                                                                                size: 10.0,
-                                                                              ),
-                                                                            ),
-                                                                            Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
-                                                                              child: Text(
-                                                                                skillItem,
-                                                                                style: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                      letterSpacing: 0.0,
-                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                                    ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          20.0,
+                                                                          13.0,
+                                                                          20.0,
+                                                                          13.0),
+                                                              child: Builder(
+                                                                builder:
+                                                                    (context) {
+                                                                  final skill =
+                                                                      _model
+                                                                          .skills
+                                                                          .toList();
+                                                                  return Wrap(
+                                                                    spacing:
+                                                                        10.0,
+                                                                    runSpacing:
+                                                                        10.0,
+                                                                    alignment:
+                                                                        WrapAlignment
+                                                                            .start,
+                                                                    crossAxisAlignment:
+                                                                        WrapCrossAlignment
+                                                                            .start,
+                                                                    direction: Axis
+                                                                        .horizontal,
+                                                                    runAlignment:
+                                                                        WrapAlignment
+                                                                            .start,
+                                                                    verticalDirection:
+                                                                        VerticalDirection
+                                                                            .down,
+                                                                    clipBehavior:
+                                                                        Clip.none,
+                                                                    children: List.generate(
+                                                                        skill
+                                                                            .length,
+                                                                        (skillIndex) {
+                                                                      final skillItem =
+                                                                          skill[
+                                                                              skillIndex];
+                                                                      return Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).lightGray1,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10.0),
                                                                         ),
-                                                                      ),
-                                                                    );
-                                                                  }),
-                                                                );
-                                                              },
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              18.0,
+                                                                              12.0,
+                                                                              18.0,
+                                                                              12.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.min,
+                                                                            children: [
+                                                                              InkWell(
+                                                                                splashColor: Colors.transparent,
+                                                                                focusColor: Colors.transparent,
+                                                                                hoverColor: Colors.transparent,
+                                                                                highlightColor: Colors.transparent,
+                                                                                onTap: () async {
+                                                                                  _model.removeAtIndexFromSkills(skillIndex);
+                                                                                  setState(() {});
+                                                                                },
+                                                                                child: Icon(
+                                                                                  Icons.close,
+                                                                                  color: FlutterFlowTheme.of(context).gray,
+                                                                                  size: 10.0,
+                                                                                ),
+                                                                              ),
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                                                                child: Text(
+                                                                                  skillItem,
+                                                                                  style: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                      ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }),
+                                                                  );
+                                                                },
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -2300,40 +2301,6 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                                       _model.checkboxValue =
                                                                           false;
                                                                     });
-                                                                  } else {
-                                                                    if (!((String
-                                                                                min,
-                                                                            String
-                                                                                max) {
-                                                                      return int.parse(
-                                                                              min) <=
-                                                                          int.parse(
-                                                                              max);
-                                                                    }(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          _model
-                                                                              .salaryMinTextController
-                                                                              .text,
-                                                                          '0',
-                                                                        ),
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          _model
-                                                                              .salaryMaxTextController
-                                                                              .text,
-                                                                          '0',
-                                                                        )))) {
-                                                                      setState(
-                                                                          () {
-                                                                        _model.salaryMaxTextController?.text = _model
-                                                                            .salaryMinTextController
-                                                                            .text;
-                                                                        _model
-                                                                            .salaryMaxTextController
-                                                                            ?.selection = TextSelection.collapsed(offset: _model.salaryMaxTextController!.text.length);
-                                                                      });
-                                                                    }
                                                                   }
                                                                 },
                                                               ),
@@ -2542,6 +2509,172 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                     ),
                                                   ),
                                                 ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          -1.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(20.0,
+                                                                28.0, 0.0, 0.0),
+                                                    child: Text(
+                                                      'Условия работы',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily,
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily),
+                                                              ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: TextFormField(
+                                                    controller: _model
+                                                        .conditionsFieldTextController,
+                                                    focusNode: _model
+                                                        .conditionsFieldFocusNode,
+                                                    onChanged: (_) =>
+                                                        EasyDebounce.debounce(
+                                                      '_model.conditionsFieldTextController',
+                                                      Duration(
+                                                          milliseconds: 100),
+                                                      () => setState(() {}),
+                                                    ),
+                                                    autofocus: false,
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      hintStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMediumFamily,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .gray,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .labelMediumFamily),
+                                                              ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .lightGray1,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      contentPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  20.0,
+                                                                  40.0,
+                                                                  20.0,
+                                                                  0.0),
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          fontSize: 15.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                    textAlign: TextAlign.start,
+                                                    maxLines: 5,
+                                                    minLines: 5,
+                                                    cursorColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    validator: _model
+                                                        .conditionsFieldTextControllerValidator
+                                                        .asValidator(context),
+                                                  ),
+                                                ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -2695,7 +2828,6 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                         TextInputAction.next,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      hintText: 'Link',
                                                       hintStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -3374,8 +3506,6 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                         TextInputAction.next,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          'Адрес работы д.10, к.2',
                                                       hintStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -3555,6 +3685,73 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                             null) {
                                                           return;
                                                         }
+                                                        if (_model
+                                                                .isSalaryRange &&
+                                                            (int.parse(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  _model
+                                                                      .salaryMinTextController
+                                                                      .text,
+                                                                  '0',
+                                                                )) >
+                                                                int.parse(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  _model
+                                                                      .salaryMaxTextController
+                                                                      .text,
+                                                                  '0',
+                                                                )))) {
+                                                          showDialog(
+                                                            barrierColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .modalBgnd,
+                                                            context: context,
+                                                            builder:
+                                                                (dialogContext) {
+                                                              return Dialog(
+                                                                elevation: 0,
+                                                                insetPadding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                alignment: AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () => _model
+                                                                          .unfocusNode
+                                                                          .canRequestFocus
+                                                                      ? FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(_model
+                                                                              .unfocusNode)
+                                                                      : FocusScope.of(
+                                                                              context)
+                                                                          .unfocus(),
+                                                                  child:
+                                                                      InfoMessageWidget(
+                                                                    text:
+                                                                        'Неверный диапазон зарплаты. Исправьте ошибку',
+                                                                    isError:
+                                                                        true,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              setState(() {}));
+
+                                                          return;
+                                                        }
                                                         if (_model.selectedCity !=
                                                                 null &&
                                                             _model.selectedCity !=
@@ -3604,6 +3801,10 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                                 workAddress: _model
                                                                     .workAdressFieldTextController
                                                                     .text,
+                                                                workingConditions:
+                                                                    _model
+                                                                        .conditionsFieldTextController
+                                                                        .text,
                                                               ),
                                                               ...mapToFirestore(
                                                                 {
@@ -3634,8 +3835,10 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                             });
                                                             context.safePop();
                                                             showDialog(
-                                                              barrierColor: Colors
-                                                                  .transparent,
+                                                              barrierColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .modalBgnd,
                                                               context: context,
                                                               builder:
                                                                   (dialogContext) {
@@ -3720,6 +3923,14 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                                 workAddress: _model
                                                                     .workAdressFieldTextController
                                                                     .text,
+                                                                workingConditions:
+                                                                    _model
+                                                                        .conditionsFieldTextController
+                                                                        .text,
+                                                                isDeleted:
+                                                                    false,
+                                                                hrEmail:
+                                                                    currentUserEmail,
                                                               ),
                                                               ...mapToFirestore(
                                                                 {
@@ -3750,8 +3961,10 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                             });
                                                             context.safePop();
                                                             showDialog(
-                                                              barrierColor: Colors
-                                                                  .transparent,
+                                                              barrierColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .modalBgnd,
                                                               context: context,
                                                               builder:
                                                                   (dialogContext) {
@@ -3792,8 +4005,10 @@ class _VacancyCreateEditWidgetState extends State<VacancyCreateEditWidget> {
                                                           }
                                                         } else {
                                                           showDialog(
-                                                            barrierColor: Colors
-                                                                .transparent,
+                                                            barrierColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .modalBgnd,
                                                             context: context,
                                                             builder:
                                                                 (dialogContext) {

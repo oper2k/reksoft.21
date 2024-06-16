@@ -45,6 +45,7 @@ class _FooterWidgetState extends State<FooterWidget> {
         phone: false,
         tablet: false,
         tabletLandscape: false,
+        desktop: false,
       ),
       child: Container(
         width: double.infinity,
@@ -165,7 +166,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Icon(
-                        Icons.mail_outline,
+                        FFIcons.kemail,
                         color: FlutterFlowTheme.of(context).white,
                         size: 20.0,
                       ),

@@ -133,7 +133,9 @@ class _HOMERedirectWidgetState extends State<HOMERedirectWidget>
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
-                      'assets/images/logo.png.png',
+                      Theme.of(context).brightness == Brightness.dark
+                          ? 'assets/images/logo_white.png'
+                          : 'assets/images/logo.png.png',
                       fit: BoxFit.contain,
                     ),
                   ).animateOnPageLoad(

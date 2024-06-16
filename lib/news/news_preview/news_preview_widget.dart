@@ -3,7 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -79,9 +79,9 @@ class _NewsPreviewWidgetState extends State<NewsPreviewWidget> {
                       ),
                     ),
                     wrapWithModel(
-                      model: _model.headerMobileModel,
+                      model: _model.headerMobileOpenModel,
                       updateCallback: () => setState(() {}),
-                      child: HeaderMobileWidget(
+                      child: HeaderMobileOpenWidget(
                         currentPage: 1,
                       ),
                     ),
@@ -499,7 +499,7 @@ class _NewsPreviewWidgetState extends State<NewsPreviewWidget> {
                                                           ),
                                                           width:
                                                               double.infinity,
-                                                          height: 222.0,
+                                                          height: 280.0,
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),

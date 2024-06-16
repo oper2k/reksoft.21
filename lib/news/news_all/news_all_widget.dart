@@ -1,15 +1,19 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/news/news_components/news_menu/news_menu_widget.dart';
 import '/placeholders/empty_news_list/empty_news_list_widget.dart';
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -23,15 +27,38 @@ class NewsAllWidget extends StatefulWidget {
   State<NewsAllWidget> createState() => _NewsAllWidgetState();
 }
 
-class _NewsAllWidgetState extends State<NewsAllWidget> {
+class _NewsAllWidgetState extends State<NewsAllWidget>
+    with TickerProviderStateMixin {
   late NewsAllModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => NewsAllModel());
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 300.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: null,
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -74,9 +101,9 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                       ),
                     ),
                     wrapWithModel(
-                      model: _model.headerMobileModel,
+                      model: _model.headerMobileOpenModel,
                       updateCallback: () => setState(() {}),
-                      child: HeaderMobileWidget(
+                      child: HeaderMobileOpenWidget(
                         currentPage: 1,
                       ),
                     ),
@@ -268,7 +295,52 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            40.0, 0.0, 40.0, 0.0),
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            0.0,
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            0.0),
                                         child: Text(
                                           'Узнавай первым',
                                           style: FlutterFlowTheme.of(context)
@@ -289,44 +361,92 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            40.0, 0.0, 40.0, 0.0),
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            0.0,
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Icon(
-                                              Icons.rocket_launch_outlined,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 40.0,
-                                            ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        18.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  'ТОП-10 новостей дня',
-                                                  style: FlutterFlowTheme.of(
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Icon(
+                                                  Icons.rocket_launch_outlined,
+                                                  color: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                                      .primary,
+                                                  size: 40.0,
                                                 ),
-                                              ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          18.0, 0.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    'ТОП-10 новостей дня',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                             if ((valueOrDefault(
                                                         currentUserDocument
@@ -655,7 +775,52 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            40.0, 0.0, 40.0, 0.0),
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            0.0,
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            0.0),
                                         child: StreamBuilder<List<NewsRecord>>(
                                           stream: queryNewsRecord(
                                             queryBuilder: (newsRecord) =>
@@ -670,6 +835,7 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                                           : null,
                                                     )
                                                     .orderBy('created_time'),
+                                            limit: 10,
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
@@ -783,43 +949,16 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                                                             20.0,
                                                                             0.0,
                                                                             0.0),
-                                                                child: Wrap(
-                                                                  spacing: 0.0,
-                                                                  runSpacing:
-                                                                      0.0,
-                                                                  alignment:
-                                                                      WrapAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      WrapCrossAlignment
-                                                                          .start,
-                                                                  direction: Axis
-                                                                      .horizontal,
-                                                                  runAlignment:
-                                                                      WrapAlignment
-                                                                          .start,
-                                                                  verticalDirection:
-                                                                      VerticalDirection
-                                                                          .down,
-                                                                  clipBehavior:
-                                                                      Clip.none,
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
                                                                   children: [
-                                                                    CachedNetworkImage(
-                                                                      fadeInDuration:
-                                                                          Duration(
-                                                                              milliseconds: 100),
-                                                                      fadeOutDuration:
-                                                                          Duration(
-                                                                              milliseconds: 100),
-                                                                      imageUrl:
-                                                                          getCORSProxyUrl(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          newItemItem
-                                                                              .companyLogo,
-                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/reksoft-21-46uzyi/assets/2fi7htzwi7vt/logo.png.png',
-                                                                        ),
-                                                                      ),
+                                                                    Image.asset(
+                                                                      Theme.of(context).brightness ==
+                                                                              Brightness.dark
+                                                                          ? 'assets/images/logo_white.png'
+                                                                          : 'assets/images/logo.png.png',
                                                                       width:
                                                                           76.0,
                                                                       height:
@@ -862,13 +1001,19 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                                                         },
                                                                       ),
                                                                     ),
-                                                                    if (getCurrentTimestamp >=
-                                                                        newItemItem
-                                                                            .publishDate!)
-                                                                      Align(
-                                                                        alignment: AlignmentDirectional(
-                                                                            1.0,
-                                                                            -1.0),
+                                                                    if ((getCurrentTimestamp >=
+                                                                            newItemItem.publishDate!) &&
+                                                                        responsiveVisibility(
+                                                                          context:
+                                                                              context,
+                                                                          phone:
+                                                                              false,
+                                                                          tablet:
+                                                                              false,
+                                                                          tabletLandscape:
+                                                                              false,
+                                                                        ))
+                                                                      Expanded(
                                                                         child:
                                                                             Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -898,32 +1043,32 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                                                     if (getCurrentTimestamp <
                                                                         newItemItem
                                                                             .publishDate!)
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            12.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
+                                                                      Expanded(
                                                                         child:
-                                                                            Text(
-                                                                          'Запланирована публикация: ${dateTimeFormat(
-                                                                            'd MMMM в HH:mm',
-                                                                            newItemItem.publishDate,
-                                                                            locale:
-                                                                                FFLocalizations.of(context).languageCode,
-                                                                          )}',
-                                                                          textAlign:
-                                                                              TextAlign.end,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                                fontSize: 15.0,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.normal,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              12.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Запланирована публикация: ${dateTimeFormat(
+                                                                              'd MMMM в HH:mm',
+                                                                              newItemItem.publishDate,
+                                                                              locale: FFLocalizations.of(context).languageCode,
+                                                                            )}',
+                                                                            textAlign:
+                                                                                TextAlign.end,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                  fontSize: 15.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                ),
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     if ((valueOrDefault(currentUserDocument?.role,
@@ -960,7 +1105,162 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                                                               highlightColor: Colors.transparent,
                                                                               onTap: () async {
                                                                                 await showDialog(
-                                                                                  barrierColor: Colors.transparent,
+                                                                                  barrierColor: FlutterFlowTheme.of(context).modalBgnd,
+                                                                                  context: context,
+                                                                                  builder: (dialogContext) {
+                                                                                    return Dialog(
+                                                                                      elevation: 0,
+                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                      child: GestureDetector(
+                                                                                        onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                        child: NewsMenuWidget(
+                                                                                          newsDoc: newItemItem,
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                ).then((value) => setState(() {}));
+                                                                              },
+                                                                              child: Container(
+                                                                                width: 40.0,
+                                                                                height: 40.0,
+                                                                                clipBehavior: Clip.antiAlias,
+                                                                                decoration: BoxDecoration(
+                                                                                  shape: BoxShape.circle,
+                                                                                ),
+                                                                                child: SvgPicture.asset(
+                                                                                  'assets/images/edit_news_icon.svg',
+                                                                                  fit: BoxFit.cover,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            20.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    if ((getCurrentTimestamp >=
+                                                                            newItemItem.publishDate!) &&
+                                                                        responsiveVisibility(
+                                                                          context:
+                                                                              context,
+                                                                          desktop:
+                                                                              false,
+                                                                        ))
+                                                                      Expanded(
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              12.0,
+                                                                              10.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            dateTimeFormat(
+                                                                              'd MMMM',
+                                                                              newItemItem.createdTime!,
+                                                                              locale: FFLocalizations.of(context).languageCode,
+                                                                            ),
+                                                                            textAlign:
+                                                                                TextAlign.end,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  fontSize: 15.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    if ((getCurrentTimestamp <
+                                                                            newItemItem.publishDate!) &&
+                                                                        responsiveVisibility(
+                                                                          context:
+                                                                              context,
+                                                                          phone:
+                                                                              false,
+                                                                          tablet:
+                                                                              false,
+                                                                          tabletLandscape:
+                                                                              false,
+                                                                        ))
+                                                                      Expanded(
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              12.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Запланирована публикация: ${dateTimeFormat(
+                                                                              'd MMMM в HH:mm',
+                                                                              newItemItem.publishDate,
+                                                                              locale: FFLocalizations.of(context).languageCode,
+                                                                            )}',
+                                                                            textAlign:
+                                                                                TextAlign.end,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                  fontSize: 15.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    if ((valueOrDefault(currentUserDocument?.role,
+                                                                                '') ==
+                                                                            'hr') &&
+                                                                        responsiveVisibility(
+                                                                          context:
+                                                                              context,
+                                                                          desktop:
+                                                                              false,
+                                                                        ))
+                                                                      Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            1.0,
+                                                                            -1.0),
+                                                                        child:
+                                                                            Builder(
+                                                                          builder: (context) =>
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                40.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                await showDialog(
+                                                                                  barrierColor: FlutterFlowTheme.of(context).modalBgnd,
                                                                                   context: context,
                                                                                   builder: (dialogContext) {
                                                                                     return Dialog(
@@ -1113,7 +1413,7 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                                                               .width *
                                                                           1.0,
                                                                       height:
-                                                                          222.0,
+                                                                          280.0,
                                                                       fit: BoxFit
                                                                           .cover,
                                                                     ),
@@ -1121,13 +1421,44 @@ class _NewsAllWidgetState extends State<NewsAllWidget> {
                                                                 ),
                                                             ],
                                                           ),
+                                                        ).animateOnPageLoad(
+                                                          animationsMap[
+                                                              'columnOnPageLoadAnimation']!,
+                                                          effects: [
+                                                            VisibilityEffect(
+                                                                duration: max(
+                                                                        1.0,
+                                                                        [
+                                                                              (300 * newItemIndex).toDouble()
+                                                                            ].reduce((curr, next) => curr < next
+                                                                                ? curr
+                                                                                : next) ??
+                                                                            0)
+                                                                    .toInt()
+                                                                    .ms),
+                                                            MoveEffect(
+                                                              curve: Curves
+                                                                  .easeInOut,
+                                                              delay: (300 *
+                                                                      newItemIndex)
+                                                                  .toDouble()
+                                                                  .ms,
+                                                              duration:
+                                                                  600.0.ms,
+                                                              begin: Offset(
+                                                                  0.0, 100.0),
+                                                              end: Offset(
+                                                                  0.0, 0.0),
+                                                            ),
+                                                          ],
                                                         );
                                                       }),
                                                     );
                                                   },
                                                 ),
                                               ),
-                                            );
+                                            ).animateOnPageLoad(animationsMap[
+                                                'containerOnPageLoadAnimation']!);
                                           },
                                         ),
                                       ),

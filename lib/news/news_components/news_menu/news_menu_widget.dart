@@ -2,7 +2,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/news/news_components/delete_news/delete_news_widget.dart';
+import '/news/delete_news/delete_news_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -63,6 +63,8 @@ class _NewsMenuWidgetState extends State<NewsMenuWidget> {
             children: [
               FFButtonWidget(
                 onPressed: () async {
+                  Navigator.pop(context);
+
                   context.pushNamed(
                     'News_createEdit',
                     queryParameters: {
@@ -112,7 +114,7 @@ class _NewsMenuWidgetState extends State<NewsMenuWidget> {
                   onPressed: () async {
                     Navigator.pop(context);
                     await showDialog(
-                      barrierColor: FlutterFlowTheme.of(context).customColor1,
+                      barrierColor: FlutterFlowTheme.of(context).modalBgnd,
                       context: context,
                       builder: (dialogContext) {
                         return Dialog(

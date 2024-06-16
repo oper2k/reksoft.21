@@ -434,8 +434,9 @@ class _WorkPlaceItemWidgetState extends State<WorkPlaceItemWidget> {
                               contentPadding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 0.0, 0.0),
                               suffixIcon: Icon(
-                                Icons.calendar_today,
+                                FFIcons.kdate,
                                 color: FlutterFlowTheme.of(context).gray,
+                                size: 24.0,
                               ),
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -617,8 +618,9 @@ class _WorkPlaceItemWidgetState extends State<WorkPlaceItemWidget> {
                               contentPadding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 0.0, 0.0),
                               suffixIcon: Icon(
-                                Icons.calendar_today,
+                                FFIcons.kdate,
                                 color: FlutterFlowTheme.of(context).gray,
+                                size: 24.0,
                               ),
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -768,8 +770,15 @@ class _WorkPlaceItemWidgetState extends State<WorkPlaceItemWidget> {
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
+                  child: Wrap(
+                    spacing: 0.0,
+                    runSpacing: 0.0,
+                    alignment: WrapAlignment.start,
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    direction: Axis.horizontal,
+                    runAlignment: WrapAlignment.start,
+                    verticalDirection: VerticalDirection.down,
+                    clipBehavior: Clip.none,
                     children: [
                       Container(
                         width: 140.0,
@@ -1057,7 +1066,7 @@ class _WorkPlaceItemWidgetState extends State<WorkPlaceItemWidget> {
                   filled: true,
                   fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   contentPadding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 0.0, 0.0),
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,

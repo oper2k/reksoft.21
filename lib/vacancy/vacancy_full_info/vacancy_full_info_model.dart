@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/vacancy/vacancy_components/vacancy_response_btn/vacancy_response_btn_widget.dart';
 import 'dart:async';
@@ -18,7 +18,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class VacancyFullInfoModel extends FlutterFlowModel<VacancyFullInfoWidget> {
   ///  State fields for stateful widgets in this page.
@@ -26,22 +25,18 @@ class VacancyFullInfoModel extends FlutterFlowModel<VacancyFullInfoWidget> {
   final unfocusNode = FocusNode();
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   // Model for vacancyResponseBtn component.
-  late VacancyResponseBtnModel vacancyResponseBtnModel1;
-  // Model for vacancyResponseBtn component.
-  late VacancyResponseBtnModel vacancyResponseBtnModel2;
+  late VacancyResponseBtnModel vacancyResponseBtnModel;
   // Model for Footer component.
   late FooterModel footerModel;
 
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
-    vacancyResponseBtnModel1 =
-        createModel(context, () => VacancyResponseBtnModel());
-    vacancyResponseBtnModel2 =
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
+    vacancyResponseBtnModel =
         createModel(context, () => VacancyResponseBtnModel());
     footerModel = createModel(context, () => FooterModel());
   }
@@ -50,9 +45,8 @@ class VacancyFullInfoModel extends FlutterFlowModel<VacancyFullInfoWidget> {
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
-    vacancyResponseBtnModel1.dispose();
-    vacancyResponseBtnModel2.dispose();
+    headerMobileOpenModel.dispose();
+    vacancyResponseBtnModel.dispose();
     footerModel.dispose();
   }
 }

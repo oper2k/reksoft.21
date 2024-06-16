@@ -101,6 +101,21 @@ class VacanciesRecord extends FirestoreRecord {
   int get viewsCount => _viewsCount ?? 0;
   bool hasViewsCount() => _viewsCount != null;
 
+  // "working_conditions" field.
+  String? _workingConditions;
+  String get workingConditions => _workingConditions ?? '';
+  bool hasWorkingConditions() => _workingConditions != null;
+
+  // "is_Deleted" field.
+  bool? _isDeleted;
+  bool get isDeleted => _isDeleted ?? false;
+  bool hasIsDeleted() => _isDeleted != null;
+
+  // "hr_email" field.
+  String? _hrEmail;
+  String get hrEmail => _hrEmail ?? '';
+  bool hasHrEmail() => _hrEmail != null;
+
   void _initializeFields() {
     _specialization = snapshotData['specialization'] as String?;
     _employmentType = snapshotData['employmentType'] as String?;
@@ -119,6 +134,9 @@ class VacanciesRecord extends FirestoreRecord {
     _testTaskLink = snapshotData['testTask_link'] as String?;
     _workAddress = snapshotData['work_address'] as String?;
     _viewsCount = castToType<int>(snapshotData['views_count']);
+    _workingConditions = snapshotData['working_conditions'] as String?;
+    _isDeleted = snapshotData['is_Deleted'] as bool?;
+    _hrEmail = snapshotData['hr_email'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -171,6 +189,9 @@ Map<String, dynamic> createVacanciesRecordData({
   String? testTaskLink,
   String? workAddress,
   int? viewsCount,
+  String? workingConditions,
+  bool? isDeleted,
+  String? hrEmail,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -189,6 +210,9 @@ Map<String, dynamic> createVacanciesRecordData({
       'testTask_link': testTaskLink,
       'work_address': workAddress,
       'views_count': viewsCount,
+      'working_conditions': workingConditions,
+      'is_Deleted': isDeleted,
+      'hr_email': hrEmail,
     }.withoutNulls,
   );
 
@@ -217,7 +241,10 @@ class VacanciesRecordDocumentEquality implements Equality<VacanciesRecord> {
         e1?.requirements == e2?.requirements &&
         e1?.testTaskLink == e2?.testTaskLink &&
         e1?.workAddress == e2?.workAddress &&
-        e1?.viewsCount == e2?.viewsCount;
+        e1?.viewsCount == e2?.viewsCount &&
+        e1?.workingConditions == e2?.workingConditions &&
+        e1?.isDeleted == e2?.isDeleted &&
+        e1?.hrEmail == e2?.hrEmail;
   }
 
   @override
@@ -238,7 +265,10 @@ class VacanciesRecordDocumentEquality implements Equality<VacanciesRecord> {
         e?.requirements,
         e?.testTaskLink,
         e?.workAddress,
-        e?.viewsCount
+        e?.viewsCount,
+        e?.workingConditions,
+        e?.isDeleted,
+        e?.hrEmail
       ]);
 
   @override

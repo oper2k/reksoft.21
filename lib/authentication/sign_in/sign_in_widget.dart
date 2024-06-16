@@ -1832,7 +1832,9 @@ class _SignInWidgetState extends State<SignInWidget>
                     padding:
                         EdgeInsetsDirectional.fromSTEB(58.0, 58.0, 0.0, 0.0),
                     child: Image.asset(
-                      'assets/images/logo.png.png',
+                      Theme.of(context).brightness == Brightness.dark
+                          ? 'assets/images/logo_white.png'
+                          : 'assets/images/logo.png.png',
                       width: 200.0,
                       height: 20.0,
                       fit: BoxFit.contain,

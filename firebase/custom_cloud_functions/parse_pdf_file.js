@@ -31,7 +31,14 @@ exports.parsePdfFile = functions.https.onRequest((req, res) => {
       const response = await axios({
         url: fileUrl,
         responseType: "arraybuffer",
+        timeout: 10000, // Установите тайм-аут 10 секунд
       });
+
+      if (response.status !== 200) {
+        throw new Error(
+          `Failed to download file, status code: ${response.status}`,
+        );
+      }
 
       const data = response.data;
       const filePath = "/tmp/tempfile.pdf";
@@ -45,55 +52,81 @@ exports.parsePdfFile = functions.https.onRequest((req, res) => {
 
       fs.unlinkSync(filePath);
 
+      // Проверка валидности данных перед отправкой в OpenAI API
+      const messages = [
+        {
+          role: "system",
+          content:
+            "Ты ассистент, который помогает анализировать файлы и извлекать данные из резюме.",
+        },
+        {
+          role: "user",
+          content: `Извлеки данные из следующего резюме в формате JSON. JSON должен быть валидным. Твой ответ должен содержать только полностью законченный json, без твоих пояснений. Json должен содержать только те ключи что представлены в примере. Удаляй все неподдерживаемые символы: 
+        {
+          "educationPlaces": [
+            {
+              "university": "Название ВУЗА",
+              "faculty": "Факультет",
+              "skills": ["ключевой навык 1", "ключевой навык 2"]
+            }
+          ],
+          "workPlaces": [
+            {
+              "company_name": "Название компании",
+              "position": "Должность",
+              "skills": ["ключевой навык 1", "ключевой навык 2"],
+              "description": "Описание выполняемых обязанностей"
+            }
+          ],
+        }
+        Сам файл: ${fileContent}`,
+        },
+      ];
+
+      // Убедитесь, что messages правильно структурированы
+      if (
+        !Array.isArray(messages) ||
+        messages.length === 0 ||
+        !messages[0].role ||
+        !messages[0].content
+      ) {
+        throw new Error("Messages format is invalid.");
+      }
+
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "system",
-            content:
-              "Ты ассистент, который помогает анализировать файлы и извлекать данные из резюме.",
-          },
-          {
-            role: "user",
-            content: `Извлеки данные из следующего резюме в формате JSON. JSON должен быть валидным. Удаляй все неподдерживаемые символы: 
-{
-  "educationPlaces": [
-    {
-      "university": "Название ВУЗА",
-      "faculty": "Факультет",
-      "skills": ["ключевой навык 1", "ключевой навык 2"]
-    }
-  ],
-  "workPlaces": [
-    {
-      "company_name": "Название компании",
-      "position": "Должность",
-      "skills": ["ключевой навык 1", "ключевой навык 2"],
-      "description": "Описание выполняемых обязанностей"
-    }
-  ],
-}
-Сам файл: ${fileContent}`,
-          },
-        ],
+        messages: messages,
         max_tokens: 2000,
       });
 
-      let gptResponse = completion.data.choices[0].message.content;
-      console.log(`GPT-3 response: ${gptResponse}`);
+      if (
+        !completion.data ||
+        !completion.data.choices ||
+        !completion.data.choices[0] ||
+        !completion.data.choices[0].message
+      ) {
+        throw new Error("Invalid response from OpenAI API");
+      }
 
-      // Очистка строки ответа от нежелательных символов
-      gptResponse = gptResponse.replace(/```json/g, "").replace(/```/g, "");
+      let gptResponse = completion.data.choices[0].message.content;
+      console.log(`GPT-4 response: ${gptResponse}`);
+
+      // Очистка строки ответа от нежелательных символов и проверка JSON
+      gptResponse = gptResponse
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
 
       let extractedData;
       try {
         extractedData = JSON.parse(gptResponse);
       } catch (parseError) {
-        console.error("Error parsing GPT-3 response:", parseError);
+        console.error("Error parsing GPT-4 response:", parseError);
+        console.error("GPT-4 raw response:", gptResponse); // Логирование полного ответа для отладки
         res
           .status(500)
           .json({
-            error: "Ошибка при разборе ответа GPT-3",
+            error: "Ошибка при разборе ответа GPT-4",
             details: parseError.message,
           });
         return;
@@ -109,12 +142,32 @@ exports.parsePdfFile = functions.https.onRequest((req, res) => {
         });
     } catch (error) {
       console.error("Error during file analysis:", error);
-      if (error.response && error.response.status === 429) {
-        res
-          .status(429)
-          .json({
-            error: "Превышен лимит запросов к API OpenAI. Попробуйте позже.",
-          });
+      if (error.response) {
+        if (error.response.status === 429) {
+          res
+            .status(429)
+            .json({
+              error: "Превышен лимит запросов к API OpenAI. Попробуйте позже.",
+            });
+        } else if (error.response.status === 503) {
+          res
+            .status(503)
+            .json({ error: "Сервис временно недоступен. Попробуйте позже." });
+        } else if (error.response.status === 400) {
+          res
+            .status(400)
+            .json({
+              error: "Некорректный запрос к API. Проверьте параметры.",
+              details: JSON.stringify(error.response.data),
+            });
+        } else {
+          res
+            .status(error.response.status)
+            .json({
+              error: `Ошибка сервера: ${error.response.status}`,
+              details: error.message,
+            });
+        }
       } else {
         res
           .status(500)

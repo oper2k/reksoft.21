@@ -17,8 +17,6 @@ export '/main/h_o_m_e_redirect/h_o_m_e_redirect_widget.dart'
     show HOMERedirectWidget;
 export '/authentication/restore_password/restore_password_widget.dart'
     show RestorePasswordWidget;
-export '/notifications/notification_mobile/notification_mobile_widget.dart'
-    show NotificationMobileWidget;
 export '/profile/edit_profile_main/edit_profile_main_widget.dart'
     show EditProfileMainWidget;
 export '/profile/edit_profile_education/edit_profile_education_widget.dart'
@@ -33,3 +31,5 @@ export '/vacancy/vacancy_create_edit/vacancy_create_edit_widget.dart'
 export '/vacancy/vacancy_list_hr/vacancy_list_hr_widget.dart'
     show VacancyListHrWidget;
 export '/vacancy/my_responses/my_responses_widget.dart' show MyResponsesWidget;
+export '/vacancy/user_full_info/user_full_info_widget.dart'
+    show UserFullInfoWidget;

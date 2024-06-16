@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/vacancy/vacancy_components/vacancy_response_btn/vacancy_response_btn_widget.dart';
 import 'dart:async';
@@ -17,7 +17,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'vacancy_full_info_model.dart';
 export 'vacancy_full_info_model.dart';
 
@@ -101,9 +100,9 @@ class _VacancyFullInfoWidgetState extends State<VacancyFullInfoWidget> {
                       ),
                     ),
                     wrapWithModel(
-                      model: _model.headerMobileModel,
+                      model: _model.headerMobileOpenModel,
                       updateCallback: () => setState(() {}),
-                      child: HeaderMobileWidget(
+                      child: HeaderMobileOpenWidget(
                         currentPage: 2,
                       ),
                     ),
@@ -280,9 +279,59 @@ class _VacancyFullInfoWidgetState extends State<VacancyFullInfoWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(40.0, 32.0,
-                                                          40.0, 32.0),
+                                                  padding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              valueOrDefault<
+                                                                  double>(
+                                                                () {
+                                                                  if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointSmall) {
+                                                                    return 20.0;
+                                                                  } else if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointMedium) {
+                                                                    return 40.0;
+                                                                  } else if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointLarge) {
+                                                                    return 40.0;
+                                                                  } else {
+                                                                    return 40.0;
+                                                                  }
+                                                                }(),
+                                                                0.0,
+                                                              ),
+                                                              32.0,
+                                                              valueOrDefault<
+                                                                  double>(
+                                                                () {
+                                                                  if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointSmall) {
+                                                                    return 20.0;
+                                                                  } else if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointMedium) {
+                                                                    return 40.0;
+                                                                  } else if (MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width <
+                                                                      kBreakpointLarge) {
+                                                                    return 40.0;
+                                                                  } else {
+                                                                    return 40.0;
+                                                                  }
+                                                                }(),
+                                                                0.0,
+                                                              ),
+                                                              32.0),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -597,164 +646,202 @@ class _VacancyFullInfoWidgetState extends State<VacancyFullInfoWidget> {
                                                           },
                                                         ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    18.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Wrap(
-                                                          spacing: 10.0,
-                                                          runSpacing: 10.0,
-                                                          alignment:
-                                                              WrapAlignment
-                                                                  .start,
-                                                          crossAxisAlignment:
-                                                              WrapCrossAlignment
-                                                                  .start,
-                                                          direction:
-                                                              Axis.horizontal,
-                                                          runAlignment:
-                                                              WrapAlignment
-                                                                  .start,
-                                                          verticalDirection:
-                                                              VerticalDirection
-                                                                  .down,
-                                                          clipBehavior:
-                                                              Clip.none,
-                                                          children: [
-                                                            if (valueOrDefault(
-                                                                    currentUserDocument
-                                                                        ?.role,
-                                                                    '') !=
-                                                                'hr')
-                                                              Opacity(
-                                                                opacity:
-                                                                    valueOrDefault<
-                                                                        double>(
-                                                                  (currentUserDocument?.responsedVacanciesList?.toList() ??
-                                                                              [])
-                                                                          .contains(widget
-                                                                              .vacancy
-                                                                              ?.reference)
-                                                                      ? 0.3
-                                                                      : 1.0,
-                                                                  1.0,
+                                                      if (widget.vacancy
+                                                              ?.isDeleted ??
+                                                          true)
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      20.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            'Вы не можете откликнуться на вакансию, так как она была удалена',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .error,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
                                                                 ),
-                                                                child:
-                                                                    AuthUserStreamWidget(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          wrapWithModel(
-                                                                    model: _model
-                                                                        .vacancyResponseBtnModel1,
-                                                                    updateCallback: () =>
-                                                                        setState(
-                                                                            () {}),
-                                                                    child:
-                                                                        VacancyResponseBtnWidget(
-                                                                      vacancy:
-                                                                          widget
-                                                                              .vacancy!,
+                                                          ),
+                                                        ),
+                                                      if (!widget
+                                                          .vacancy!.isDeleted)
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      18.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Wrap(
+                                                            spacing: 10.0,
+                                                            runSpacing: 10.0,
+                                                            alignment:
+                                                                WrapAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                WrapCrossAlignment
+                                                                    .start,
+                                                            direction:
+                                                                Axis.horizontal,
+                                                            runAlignment:
+                                                                WrapAlignment
+                                                                    .start,
+                                                            verticalDirection:
+                                                                VerticalDirection
+                                                                    .down,
+                                                            clipBehavior:
+                                                                Clip.none,
+                                                            children: [
+                                                              if (valueOrDefault(
+                                                                      currentUserDocument
+                                                                          ?.role,
+                                                                      '') !=
+                                                                  'hr')
+                                                                Opacity(
+                                                                  opacity:
+                                                                      valueOrDefault<
+                                                                          double>(
+                                                                    (currentUserDocument?.responsedVacanciesList?.toList() ?? []).contains(widget
+                                                                            .vacancy
+                                                                            ?.reference)
+                                                                        ? 0.3
+                                                                        : 1.0,
+                                                                    1.0,
+                                                                  ),
+                                                                  child:
+                                                                      AuthUserStreamWidget(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            wrapWithModel(
+                                                                      model: _model
+                                                                          .vacancyResponseBtnModel,
+                                                                      updateCallback:
+                                                                          () =>
+                                                                              setState(() {}),
+                                                                      child:
+                                                                          VacancyResponseBtnWidget(
+                                                                        vacancy:
+                                                                            widget.vacancy!,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            Builder(
-                                                              builder:
-                                                                  (context) =>
-                                                                      InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  await Clipboard.setData(
-                                                                      ClipboardData(
-                                                                          text:
-                                                                              'https://bytebosses.ru/vacancyFullInfo?vacancy=${widget.vacancy?.reference.id}'));
-                                                                  showDialog(
-                                                                    barrierColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (dialogContext) {
-                                                                      return Dialog(
-                                                                        elevation:
-                                                                            0,
-                                                                        insetPadding:
-                                                                            EdgeInsets.zero,
-                                                                        backgroundColor:
-                                                                            Colors.transparent,
-                                                                        alignment:
-                                                                            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                        child:
-                                                                            GestureDetector(
-                                                                          onTap: () => _model.unfocusNode.canRequestFocus
-                                                                              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                                                                              : FocusScope.of(context).unfocus(),
-                                                                          child:
-                                                                              InfoMessageWidget(
+                                                              Builder(
+                                                                builder:
+                                                                    (context) =>
+                                                                        InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    await Clipboard.setData(
+                                                                        ClipboardData(
                                                                             text:
-                                                                                'Ссылка на вакансию скопирована',
+                                                                                'https://bytebosses.ru/vacancyFullInfo?vacancy=${widget.vacancy?.reference.id}'));
+                                                                    showDialog(
+                                                                      barrierColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (dialogContext) {
+                                                                        return Dialog(
+                                                                          elevation:
+                                                                              0,
+                                                                          insetPadding:
+                                                                              EdgeInsets.zero,
+                                                                          backgroundColor:
+                                                                              Colors.transparent,
+                                                                          alignment:
+                                                                              AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                          child:
+                                                                              GestureDetector(
+                                                                            onTap: () => _model.unfocusNode.canRequestFocus
+                                                                                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                                : FocusScope.of(context).unfocus(),
+                                                                            child:
+                                                                                InfoMessageWidget(
+                                                                              text: 'Ссылка на вакансию скопирована',
+                                                                            ),
                                                                           ),
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  ).then((value) =>
-                                                                      setState(
-                                                                          () {}));
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  width: 60.0,
-                                                                  height: 50.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
-                                                                    border:
-                                                                        Border
-                                                                            .all(
+                                                                        );
+                                                                      },
+                                                                    ).then((value) =>
+                                                                        setState(
+                                                                            () {}));
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    width: 60.0,
+                                                                    height:
+                                                                        50.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primary,
-                                                                      width:
-                                                                          1.0,
+                                                                          .secondaryBackground,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        width:
+                                                                            1.0,
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .share_sharp,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                    size: 20.0,
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Icon(
+                                                                      FFIcons
+                                                                          .kshare,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .blueNight,
+                                                                      size:
+                                                                          20.0,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
@@ -869,6 +956,75 @@ class _VacancyFullInfoWidgetState extends State<VacancyFullInfoWidget> {
                                                               String>(
                                                             widget.vacancy
                                                                 ?.requirements,
+                                                            'Не указано',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily,
+                                                                fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily),
+                                                                lineHeight: 1.4,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    24.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          'Условия работы',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily,
+                                                                fontSize: 18.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily),
+                                                                lineHeight: 1.4,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    24.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            widget.vacancy
+                                                                ?.workingConditions,
                                                             'Не указано',
                                                           ),
                                                           style: FlutterFlowTheme
@@ -1054,161 +1210,6 @@ class _VacancyFullInfoWidgetState extends State<VacancyFullInfoWidget> {
                                               ),
                                             ],
                                           ),
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                            tablet: false,
-                                            tabletLandscape: false,
-                                            desktop: false,
-                                          ))
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 18.0, 0.0, 0.0),
-                                              child: Wrap(
-                                                spacing: 10.0,
-                                                runSpacing: 10.0,
-                                                alignment: WrapAlignment.start,
-                                                crossAxisAlignment:
-                                                    WrapCrossAlignment.start,
-                                                direction: Axis.horizontal,
-                                                runAlignment:
-                                                    WrapAlignment.start,
-                                                verticalDirection:
-                                                    VerticalDirection.down,
-                                                clipBehavior: Clip.none,
-                                                children: [
-                                                  if (valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.role,
-                                                          '') !=
-                                                      'hr')
-                                                    Opacity(
-                                                      opacity: valueOrDefault<
-                                                          double>(
-                                                        (currentUserDocument
-                                                                        ?.responsedVacanciesList
-                                                                        ?.toList() ??
-                                                                    [])
-                                                                .contains(widget
-                                                                    .vacancy
-                                                                    ?.reference)
-                                                            ? 0.3
-                                                            : 1.0,
-                                                        1.0,
-                                                      ),
-                                                      child:
-                                                          AuthUserStreamWidget(
-                                                        builder: (context) =>
-                                                            wrapWithModel(
-                                                          model: _model
-                                                              .vacancyResponseBtnModel2,
-                                                          updateCallback: () =>
-                                                              setState(() {}),
-                                                          child:
-                                                              VacancyResponseBtnWidget(
-                                                            vacancy:
-                                                                widget.vacancy!,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  Builder(
-                                                    builder: (context) =>
-                                                        InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        await Share.share(
-                                                          widget.vacancy!
-                                                              .reference.id,
-                                                          sharePositionOrigin:
-                                                              getWidgetBoundingBox(
-                                                                  context),
-                                                        );
-                                                        showDialog(
-                                                          barrierColor: Colors
-                                                              .transparent,
-                                                          context: context,
-                                                          builder:
-                                                              (dialogContext) {
-                                                            return Dialog(
-                                                              elevation: 0,
-                                                              insetPadding:
-                                                                  EdgeInsets
-                                                                      .zero,
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              alignment: AlignmentDirectional(
-                                                                      0.0, 0.0)
-                                                                  .resolve(
-                                                                      Directionality.of(
-                                                                          context)),
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () => _model
-                                                                        .unfocusNode
-                                                                        .canRequestFocus
-                                                                    ? FocusScope.of(
-                                                                            context)
-                                                                        .requestFocus(_model
-                                                                            .unfocusNode)
-                                                                    : FocusScope.of(
-                                                                            context)
-                                                                        .unfocus(),
-                                                                child:
-                                                                    InfoMessageWidget(
-                                                                  text:
-                                                                      'Ссылка на вакансию скопирована',
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            setState(() {}));
-                                                      },
-                                                      child: Container(
-                                                        width: 60.0,
-                                                        height: 50.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                          border: Border.all(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            width: 1.0,
-                                                          ),
-                                                        ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0.0, 0.0),
-                                                        child: Icon(
-                                                          Icons.share_sharp,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          size: 20.0,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
                                         ].addToEnd(SizedBox(height: () {
                                           if (MediaQuery.sizeOf(context).width <
                                               kBreakpointSmall) {

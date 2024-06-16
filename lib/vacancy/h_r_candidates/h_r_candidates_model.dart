@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -9,7 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/placeholders/empty_responses_list/empty_responses_list_widget.dart';
 import '/vacancy/vacancy_components/response_accept/response_accept_widget.dart';
@@ -40,18 +41,20 @@ class HRCandidatesModel extends FlutterFlowModel<HRCandidatesWidget> {
   final unfocusNode = FocusNode();
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   // State field(s) for vacancyFilter widget.
   String? vacancyFilterValue;
   FormFieldController<String>? vacancyFilterValueController;
+  // Stores action output result for [Backend Call - API (Send email)] action in Button widget.
+  ApiCallResponse? apiResultnma;
   // Model for Footer component.
   late FooterModel footerModel;
 
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
     footerModel = createModel(context, () => FooterModel());
   }
 
@@ -59,7 +62,7 @@ class HRCandidatesModel extends FlutterFlowModel<HRCandidatesWidget> {
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
+    headerMobileOpenModel.dispose();
     footerModel.dispose();
   }
 }

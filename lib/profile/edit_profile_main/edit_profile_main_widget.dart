@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/profile/profile_components/social_links_main/social_links_main_widget.dart';
 import 'dart:async';
@@ -135,9 +135,9 @@ class _EditProfileMainWidgetState extends State<EditProfileMainWidget> {
                         ),
                       ),
                       wrapWithModel(
-                        model: _model.headerMobileModel,
+                        model: _model.headerMobileOpenModel,
                         updateCallback: () => setState(() {}),
-                        child: HeaderMobileWidget(
+                        child: HeaderMobileOpenWidget(
                           currentPage: 0,
                         ),
                       ),
@@ -1273,7 +1273,7 @@ class _EditProfileMainWidgetState extends State<EditProfileMainWidget> {
                                                                         .fromSTEB(
                                                                             20.0,
                                                                             0.0,
-                                                                            0.0,
+                                                                            40.0,
                                                                             0.0),
                                                                 suffixIcon:
                                                                     Icon(

@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import 'dart:async';
 import 'dart:math';
@@ -29,6 +29,8 @@ class ChatPageModel extends FlutterFlowModel<ChatPageWidget> {
 
   bool showPanel = false;
 
+  bool showInput = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -36,8 +38,8 @@ class ChatPageModel extends FlutterFlowModel<ChatPageWidget> {
   ApiCallResponse? chatGPTResponse23Copy;
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   // State field(s) for Column widget.
   ScrollController? columnController1;
   // State field(s) for Column widget.
@@ -48,6 +50,11 @@ class ChatPageModel extends FlutterFlowModel<ChatPageWidget> {
   String? Function(BuildContext, String?)? messageFieldTextControllerValidator;
   // Stores action output result for [Backend Call - API (Send Full Prompt)] action in messageField widget.
   ApiCallResponse? chatGPTResponse23;
+  // State field(s) for messageFieldEMPTY widget.
+  FocusNode? messageFieldEMPTYFocusNode;
+  TextEditingController? messageFieldEMPTYTextController;
+  String? Function(BuildContext, String?)?
+      messageFieldEMPTYTextControllerValidator;
   // Stores action output result for [Backend Call - API (Analyse Chat)] action in Button widget.
   ApiCallResponse? analysechatresp;
   // Model for Footer component.
@@ -56,7 +63,7 @@ class ChatPageModel extends FlutterFlowModel<ChatPageWidget> {
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
     columnController1 = ScrollController();
     columnController2 = ScrollController();
     footerModel = createModel(context, () => FooterModel());
@@ -66,11 +73,14 @@ class ChatPageModel extends FlutterFlowModel<ChatPageWidget> {
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
+    headerMobileOpenModel.dispose();
     columnController1?.dispose();
     columnController2?.dispose();
     messageFieldFocusNode?.dispose();
     messageFieldTextController?.dispose();
+
+    messageFieldEMPTYFocusNode?.dispose();
+    messageFieldEMPTYTextController?.dispose();
 
     footerModel.dispose();
   }

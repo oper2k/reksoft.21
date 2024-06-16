@@ -114,7 +114,7 @@ class _ResumeAIresultsWidgetState extends State<ResumeAIresultsWidget>
                           Navigator.pop(context);
                         },
                         child: Icon(
-                          Icons.close,
+                          FFIcons.kclose,
                           color: FlutterFlowTheme.of(context).gray,
                           size: 24.0,
                         ),

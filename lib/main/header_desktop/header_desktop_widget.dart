@@ -100,161 +100,253 @@ class _HeaderDesktopWidgetState extends State<HeaderDesktopWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                'assets/images/logo.png.png',
-                width: 116.0,
-                height: 24.0,
-                fit: BoxFit.contain,
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.goNamed('News_all');
+                },
+                child: Image.asset(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? 'assets/images/logo_white.png'
+                      : 'assets/images/logo.png.png',
+                  width: 116.0,
+                  height: 24.0,
+                  fit: BoxFit.contain,
+                ),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed('News_all');
-                      },
-                      child: Text(
-                        'Новости',
-                        style: FlutterFlowTheme.of(context)
-                            .headlineMedium
-                            .override(
-                              fontFamily: FlutterFlowTheme.of(context)
-                                  .headlineMediumFamily,
-                              color: valueOrDefault<Color>(
-                                widget.page == 'news'
-                                    ? FlutterFlowTheme.of(context).primaryText
-                                    : FlutterFlowTheme.of(context).gray,
-                                FlutterFlowTheme.of(context).gray,
-                              ),
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .headlineMediumFamily),
-                            ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        if (valueOrDefault(currentUserDocument?.role, '') ==
-                            'hr') {
-                          context.pushNamed('VacancyList_hr');
-                        } else if (valueOrDefault(
-                                currentUserDocument?.role, '') ==
-                            'applicant') {
-                          context.pushNamed('VacancyList_applicant');
-                        } else {
-                          context.pushNamed('VacancyList_applicant');
-                        }
-                      },
-                      child: Text(
-                        'Вакансии',
-                        style: FlutterFlowTheme.of(context)
-                            .headlineMedium
-                            .override(
-                              fontFamily: FlutterFlowTheme.of(context)
-                                  .headlineMediumFamily,
-                              color: valueOrDefault<Color>(
-                                widget.page == 'vacancy'
-                                    ? FlutterFlowTheme.of(context).primaryText
-                                    : FlutterFlowTheme.of(context).gray,
-                                FlutterFlowTheme.of(context).gray,
-                              ),
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .headlineMediumFamily),
-                            ),
-                      ),
-                    ),
-                  ),
-                  if (valueOrDefault(currentUserDocument?.role, '') ==
-                      'applicant')
-                    Padding(
+                  MouseRegion(
+                    opaque: false,
+                    cursor: MouseCursor.defer ?? MouseCursor.defer,
+                    child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('My_Responses');
-                          },
-                          child: Text(
-                            'Мои отклики',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineMediumFamily,
-                                  color: valueOrDefault<Color>(
-                                    widget.page == 'response'
-                                        ? FlutterFlowTheme.of(context)
-                                            .primaryText
-                                        : FlutterFlowTheme.of(context).gray,
-                                    FlutterFlowTheme.of(context).gray,
-                                  ),
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .headlineMediumFamily),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('News_all');
+                        },
+                        child: Text(
+                          'Новости',
+                          style: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .headlineMediumFamily,
+                                color: valueOrDefault<Color>(
+                                  () {
+                                    if (widget.page == 'news') {
+                                      return FlutterFlowTheme.of(context)
+                                          .primaryText;
+                                    } else if (_model.mouseRegionHovered1!) {
+                                      return FlutterFlowTheme.of(context)
+                                          .primaryText;
+                                    } else {
+                                      return FlutterFlowTheme.of(context).gray;
+                                    }
+                                  }(),
+                                  FlutterFlowTheme.of(context).gray,
                                 ),
+                                letterSpacing: 0.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .headlineMediumFamily),
+                              ),
+                        ),
+                      ),
+                    ),
+                    onEnter: ((event) async {
+                      setState(() => _model.mouseRegionHovered1 = true);
+                    }),
+                    onExit: ((event) async {
+                      setState(() => _model.mouseRegionHovered1 = false);
+                    }),
+                  ),
+                  MouseRegion(
+                    opaque: false,
+                    cursor: MouseCursor.defer ?? MouseCursor.defer,
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          if (valueOrDefault(currentUserDocument?.role, '') ==
+                              'hr') {
+                            context.pushNamed('VacancyList_hr');
+                          } else if (valueOrDefault(
+                                  currentUserDocument?.role, '') ==
+                              'applicant') {
+                            context.pushNamed('VacancyList_applicant');
+                          } else {
+                            context.pushNamed('VacancyList_applicant');
+                          }
+                        },
+                        child: Text(
+                          'Вакансии',
+                          style: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .headlineMediumFamily,
+                                color: valueOrDefault<Color>(
+                                  () {
+                                    if (widget.page == 'vacancy') {
+                                      return FlutterFlowTheme.of(context)
+                                          .primaryText;
+                                    } else if (_model.mouseRegionHovered2!) {
+                                      return FlutterFlowTheme.of(context)
+                                          .primaryText;
+                                    } else {
+                                      return FlutterFlowTheme.of(context).gray;
+                                    }
+                                  }(),
+                                  FlutterFlowTheme.of(context).gray,
+                                ),
+                                letterSpacing: 0.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .headlineMediumFamily),
+                              ),
+                        ),
+                      ),
+                    ),
+                    onEnter: ((event) async {
+                      setState(() => _model.mouseRegionHovered2 = true);
+                    }),
+                    onExit: ((event) async {
+                      setState(() => _model.mouseRegionHovered2 = false);
+                    }),
+                  ),
+                  MouseRegion(
+                    opaque: false,
+                    cursor: MouseCursor.defer ?? MouseCursor.defer,
+                    child: Visibility(
+                      visible: valueOrDefault(currentUserDocument?.role, '') ==
+                          'applicant',
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 0.0, 20.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed('My_Responses');
+                            },
+                            child: Text(
+                              'Мои отклики',
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .headlineMediumFamily,
+                                    color: valueOrDefault<Color>(
+                                      () {
+                                        if (widget.page == 'response') {
+                                          return FlutterFlowTheme.of(context)
+                                              .primaryText;
+                                        } else if (_model
+                                            .mouseRegionHovered3!) {
+                                          return FlutterFlowTheme.of(context)
+                                              .primaryText;
+                                        } else {
+                                          return FlutterFlowTheme.of(context)
+                                              .gray;
+                                        }
+                                      }(),
+                                      FlutterFlowTheme.of(context).gray,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .headlineMediumFamily),
+                                  ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  if (valueOrDefault(currentUserDocument?.role, '') == 'hr')
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('HR_Candidates');
-                          },
-                          child: Text(
-                            'Кандидаты',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineMediumFamily,
-                                  color: valueOrDefault<Color>(
-                                    widget.page == 'candidate'
-                                        ? FlutterFlowTheme.of(context)
-                                            .primaryText
-                                        : FlutterFlowTheme.of(context).gray,
-                                    FlutterFlowTheme.of(context).gray,
+                    onEnter: ((event) async {
+                      setState(() => _model.mouseRegionHovered3 = true);
+                    }),
+                    onExit: ((event) async {
+                      setState(() => _model.mouseRegionHovered3 = false);
+                    }),
+                  ),
+                  MouseRegion(
+                    opaque: false,
+                    cursor: MouseCursor.defer ?? MouseCursor.defer,
+                    child: Visibility(
+                      visible:
+                          valueOrDefault(currentUserDocument?.role, '') == 'hr',
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 0.0, 20.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed('HR_Candidates');
+                            },
+                            child: Text(
+                              'Кандидаты',
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .headlineMediumFamily,
+                                    color: valueOrDefault<Color>(
+                                      () {
+                                        if (widget.page == 'candidate') {
+                                          return FlutterFlowTheme.of(context)
+                                              .primaryText;
+                                        } else if (_model
+                                            .mouseRegionHovered4!) {
+                                          return FlutterFlowTheme.of(context)
+                                              .primaryText;
+                                        } else {
+                                          return FlutterFlowTheme.of(context)
+                                              .gray;
+                                        }
+                                      }(),
+                                      FlutterFlowTheme.of(context).gray,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .headlineMediumFamily),
                                   ),
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .headlineMediumFamily),
-                                ),
+                            ),
                           ),
                         ),
                       ),
                     ),
+                    onEnter: ((event) async {
+                      setState(() => _model.mouseRegionHovered4 = true);
+                    }),
+                    onExit: ((event) async {
+                      setState(() => _model.mouseRegionHovered4 = false);
+                    }),
+                  ),
                 ],
               ),
               Row(
@@ -267,190 +359,258 @@ class _HeaderDesktopWidgetState extends State<HeaderDesktopWidget> {
                         phone: false,
                       ))
                     Builder(
-                      builder: (context) => AuthUserStreamWidget(
-                        builder: (context) => InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            await showDialog(
-                              barrierColor:
-                                  FlutterFlowTheme.of(context).customColor1,
-                              context: context,
-                              builder: (dialogContext) {
-                                return Dialog(
-                                  elevation: 0,
-                                  insetPadding: EdgeInsets.zero,
-                                  backgroundColor: Colors.transparent,
-                                  alignment: AlignmentDirectional(0.0, 0.0)
-                                      .resolve(Directionality.of(context)),
-                                  child: UploadResumeWidget(),
-                                );
-                              },
-                            ).then((value) => setState(() {}));
-                          },
-                          child: Container(
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context).darkBlue,
-                                width: 1.0,
+                      builder: (context) => Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 18.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              await showDialog(
+                                barrierColor:
+                                    FlutterFlowTheme.of(context).modalBgnd,
+                                context: context,
+                                builder: (dialogContext) {
+                                  return Dialog(
+                                    elevation: 0,
+                                    insetPadding: EdgeInsets.zero,
+                                    backgroundColor: Colors.transparent,
+                                    alignment: AlignmentDirectional(0.0, 0.0)
+                                        .resolve(Directionality.of(context)),
+                                    child: UploadResumeWidget(),
+                                  );
+                                },
+                              ).then((value) => setState(() {}));
+                            },
+                            child: Container(
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).darkBlue,
+                                  width: 1.0,
+                                ),
                               ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  22.0, 0.0, 22.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.cloud_download,
-                                    color:
-                                        FlutterFlowTheme.of(context).darkBlue,
-                                    size: 24.0,
-                                  ),
-                                  if (responsiveVisibility(
-                                    context: context,
-                                    tablet: false,
-                                    tabletLandscape: false,
-                                  ))
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Загрузить резюме',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(FlutterFlowTheme
-                                                          .of(context)
-                                                      .headlineMediumFamily),
-                                            ),
-                                      ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    22.0, 0.0, 22.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      FFIcons.kdownload,
+                                      color:
+                                          FlutterFlowTheme.of(context).darkBlue,
+                                      size: 24.0,
                                     ),
-                                ],
+                                    if (responsiveVisibility(
+                                      context: context,
+                                      tablet: false,
+                                      tabletLandscape: false,
+                                    ))
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Загрузить резюме',
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(FlutterFlowTheme
+                                                            .of(context)
+                                                        .headlineMediumFamily),
+                                              ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 8.0, 0.0),
+                  if (responsiveVisibility(
+                    context: context,
+                    phone: false,
+                    tablet: false,
+                    tabletLandscape: false,
+                    desktop: false,
+                  ))
+                    MouseRegion(
+                      opaque: false,
+                      cursor: MouseCursor.defer ?? MouseCursor.defer,
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                        child: Container(
+                          width: 42.0,
+                          height: 42.0,
+                          decoration: BoxDecoration(),
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Icon(
+                            FFIcons.ktalk,
+                            color: valueOrDefault<Color>(
+                              () {
+                                if (widget.page == 'profile') {
+                                  return FlutterFlowTheme.of(context)
+                                      .primaryText;
+                                } else if (_model.mouseRegionHovered5!) {
+                                  return FlutterFlowTheme.of(context)
+                                      .primaryText;
+                                } else {
+                                  return FlutterFlowTheme.of(context).gray;
+                                }
+                              }(),
+                              FlutterFlowTheme.of(context).gray,
+                            ),
+                            size: 24.0,
+                          ),
+                        ),
+                      ),
+                      onEnter: ((event) async {
+                        setState(() => _model.mouseRegionHovered5 = true);
+                      }),
+                      onExit: ((event) async {
+                        setState(() => _model.mouseRegionHovered5 = false);
+                      }),
+                    ),
+                  MouseRegion(
+                    opaque: false,
+                    cursor: MouseCursor.defer ?? MouseCursor.defer,
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('Notifications');
+                        },
+                        child: Container(
+                          width: 42.0,
+                          height: 42.0,
+                          decoration: BoxDecoration(),
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: FutureBuilder<int>(
+                            future: queryNotificationsRecordCount(
+                              queryBuilder: (notificationsRecord) =>
+                                  notificationsRecord
+                                      .where(
+                                        'to',
+                                        isEqualTo: currentUserReference,
+                                      )
+                                      .where(
+                                        'isViewed',
+                                        isNotEqualTo: true,
+                                      ),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return NotifyIconPlaceholderWidget();
+                              }
+                              int badgeCount = snapshot.data!;
+                              return badges.Badge(
+                                badgeContent: Text(
+                                  valueOrDefault<String>(
+                                    badgeCount.toString(),
+                                    '0',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
+                                      ),
+                                ),
+                                showBadge: badgeCount > 0,
+                                shape: badges.BadgeShape.circle,
+                                badgeColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                elevation: 0.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    6.0, 6.0, 6.0, 6.0),
+                                position: badges.BadgePosition.topEnd(),
+                                animationType: badges.BadgeAnimationType.scale,
+                                toAnimate: true,
+                                child: wrapWithModel(
+                                  model: _model.notifyIconPlaceholderModel,
+                                  updateCallback: () => setState(() {}),
+                                  child: NotifyIconPlaceholderWidget(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    onEnter: ((event) async {
+                      setState(() => _model.mouseRegionHovered6 = true);
+                    }),
+                    onExit: ((event) async {
+                      setState(() => _model.mouseRegionHovered6 = false);
+                    }),
+                  ),
+                  MouseRegion(
+                    opaque: false,
+                    cursor: MouseCursor.defer ?? MouseCursor.defer,
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('Notifications');
+                        context.pushNamed('Profile');
                       },
                       child: Container(
                         width: 42.0,
                         height: 42.0,
                         decoration: BoxDecoration(),
                         alignment: AlignmentDirectional(0.0, 0.0),
-                        child: FutureBuilder<int>(
-                          future: queryNotificationsRecordCount(
-                            queryBuilder: (notificationsRecord) =>
-                                notificationsRecord
-                                    .where(
-                                      'to',
-                                      isEqualTo: currentUserReference,
-                                    )
-                                    .where(
-                                      'isViewed',
-                                      isNotEqualTo: true,
-                                    ),
+                        child: Icon(
+                          FFIcons.kperson,
+                          color: valueOrDefault<Color>(
+                            () {
+                              if (widget.page == 'profile') {
+                                return FlutterFlowTheme.of(context).primaryText;
+                              } else if (_model.mouseRegionHovered7!) {
+                                return FlutterFlowTheme.of(context).primaryText;
+                              } else {
+                                return FlutterFlowTheme.of(context).gray;
+                              }
+                            }(),
+                            FlutterFlowTheme.of(context).gray,
                           ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return NotifyIconPlaceholderWidget(
-                                color: widget.page == 'notify'
-                                    ? FlutterFlowTheme.of(context).primaryText
-                                    : FlutterFlowTheme.of(context).gray,
-                              );
-                            }
-                            int badgeCount = snapshot.data!;
-                            return badges.Badge(
-                              badgeContent: Text(
-                                valueOrDefault<String>(
-                                  badgeCount.toString(),
-                                  '0',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .titleSmallFamily,
-                                      color: Colors.white,
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily),
-                                    ),
-                              ),
-                              showBadge: badgeCount > 0,
-                              shape: badges.BadgeShape.circle,
-                              badgeColor: FlutterFlowTheme.of(context).primary,
-                              elevation: 0.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  6.0, 6.0, 6.0, 6.0),
-                              position: badges.BadgePosition.topEnd(),
-                              animationType: badges.BadgeAnimationType.scale,
-                              toAnimate: true,
-                              child: wrapWithModel(
-                                model: _model.notifyIconPlaceholderModel,
-                                updateCallback: () => setState(() {}),
-                                child: NotifyIconPlaceholderWidget(
-                                  color: widget.page == 'notify'
-                                      ? FlutterFlowTheme.of(context).primaryText
-                                      : FlutterFlowTheme.of(context).gray,
-                                ),
-                              ),
-                            );
-                          },
+                          size: 24.0,
                         ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed('Profile');
-                    },
-                    child: Container(
-                      width: 42.0,
-                      height: 42.0,
-                      decoration: BoxDecoration(),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.person,
-                        color: valueOrDefault<Color>(
-                          widget.page == 'profile'
-                              ? FlutterFlowTheme.of(context).primaryText
-                              : FlutterFlowTheme.of(context).gray,
-                          FlutterFlowTheme.of(context).gray,
-                        ),
-                        size: 24.0,
-                      ),
-                    ),
+                    onEnter: ((event) async {
+                      setState(() => _model.mouseRegionHovered7 = true);
+                    }),
+                    onExit: ((event) async {
+                      setState(() => _model.mouseRegionHovered7 = false);
+                    }),
                   ),
                 ],
               ),

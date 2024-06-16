@@ -42,7 +42,7 @@ class _EmptyNotificationsListWidgetState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+      padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
       child: Text(
         'Нет новых уведомлений...',
         style: FlutterFlowTheme.of(context).bodyMedium.override(

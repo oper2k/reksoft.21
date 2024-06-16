@@ -61,6 +61,11 @@ class NewsRecord extends FirestoreRecord {
   DateTime? get publishDate => _publishDate;
   bool hasPublishDate() => _publishDate != null;
 
+  // "creator" field.
+  DocumentReference? _creator;
+  DocumentReference? get creator => _creator;
+  bool hasCreator() => _creator != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _image = snapshotData['image'] as String?;
@@ -71,6 +76,7 @@ class NewsRecord extends FirestoreRecord {
     _shortDescription = snapshotData['shortDescription'] as String?;
     _companyLogo = snapshotData['companyLogo'] as String?;
     _publishDate = snapshotData['publishDate'] as DateTime?;
+    _creator = snapshotData['creator'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -115,6 +121,7 @@ Map<String, dynamic> createNewsRecordData({
   String? shortDescription,
   String? companyLogo,
   DateTime? publishDate,
+  DocumentReference? creator,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -126,6 +133,7 @@ Map<String, dynamic> createNewsRecordData({
       'shortDescription': shortDescription,
       'companyLogo': companyLogo,
       'publishDate': publishDate,
+      'creator': creator,
     }.withoutNulls,
   );
 
@@ -146,7 +154,8 @@ class NewsRecordDocumentEquality implements Equality<NewsRecord> {
         e1?.content == e2?.content &&
         e1?.shortDescription == e2?.shortDescription &&
         e1?.companyLogo == e2?.companyLogo &&
-        e1?.publishDate == e2?.publishDate;
+        e1?.publishDate == e2?.publishDate &&
+        e1?.creator == e2?.creator;
   }
 
   @override
@@ -159,7 +168,8 @@ class NewsRecordDocumentEquality implements Equality<NewsRecord> {
         e?.content,
         e?.shortDescription,
         e?.companyLogo,
-        e?.publishDate
+        e?.publishDate,
+        e?.creator
       ]);
 
   @override

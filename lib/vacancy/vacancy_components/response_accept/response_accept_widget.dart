@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/vacancy/vacancy_components/response_decline/response_decline_widget.dart';
+import 'dart:async';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +124,7 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
                           Navigator.pop(context);
                         },
                         child: Icon(
-                          Icons.close,
+                          FFIcons.kclose,
                           color: FlutterFlowTheme.of(context).gray,
                           size: 24.0,
                         ),
@@ -134,42 +136,33 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          '${widget.user?.displayName} ${widget.user?.surname}',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                color: FlutterFlowTheme.of(context).primary,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
-                        ),
-                        Text(
-                          'на должность  ${widget.vacancy?.jobTitle}',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
-                        ),
-                      ].divide(SizedBox(width: 5.0)),
+                    child: Text(
+                      '${widget.user?.displayName} ${widget.user?.surname}',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            color: FlutterFlowTheme.of(context).primary,
+                            fontSize: 16.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyMediumFamily),
+                          ),
                     ),
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    'на должность  ${widget.vacancy?.jobTitle}',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          fontSize: 16.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.w600,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
                   ),
                 ),
                 Flexible(
@@ -225,10 +218,22 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
                                   },
                                 ),
                               });
+                              unawaited(
+                                () async {
+                                  _model.apiResultnma =
+                                      await SendEmailGroup.sendEmailCall.call(
+                                    email: widget.user?.email,
+                                    name:
+                                        '${currentUserDisplayName} ${valueOrDefault(currentUserDocument?.surname, '')}',
+                                    text:
+                                        'Здравствуйте. Приглашаем вас на работу на должность ${widget.vacancy?.jobTitle}',
+                                  );
+                                }(),
+                              );
                               Navigator.pop(context);
                               showDialog(
                                 barrierColor:
-                                    FlutterFlowTheme.of(context).customColor1,
+                                    FlutterFlowTheme.of(context).modalBgnd,
                                 context: context,
                                 builder: (dialogContext) {
                                   return Dialog(
@@ -243,6 +248,8 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
                                   );
                                 },
                               ).then((value) => setState(() {}));
+
+                              setState(() {});
                             },
                             text: 'Пригласить на работу',
                             options: FFButtonOptions(
@@ -288,7 +295,7 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
                               Navigator.pop(context);
                               await showDialog(
                                 barrierColor:
-                                    FlutterFlowTheme.of(context).customColor1,
+                                    FlutterFlowTheme.of(context).modalBgnd,
                                 context: context,
                                 builder: (dialogContext) {
                                   return Dialog(

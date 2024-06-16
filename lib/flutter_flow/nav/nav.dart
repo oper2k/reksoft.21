@@ -143,7 +143,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HR_Candidates',
           path: '/hRCandidates',
           requireAuth: true,
-          builder: (context, params) => HRCandidatesWidget(),
+          builder: (context, params) => HRCandidatesWidget(
+            vacancy: params.getParam(
+              'vacancy',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['vacancies'],
+            ),
+          ),
         ),
         FFRoute(
           name: 'News_single',
@@ -187,26 +194,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'restorePassword',
           path: '/restorePassword',
           builder: (context, params) => RestorePasswordWidget(),
-        ),
-        FFRoute(
-          name: 'Notification_mobile',
-          path: '/notificationMobile',
-          requireAuth: true,
-          asyncParams: {
-            'notification':
-                getDoc(['notifications'], NotificationsRecord.fromSnapshot),
-            'sender': getDoc(['users'], UsersRecord.fromSnapshot),
-          },
-          builder: (context, params) => NotificationMobileWidget(
-            notification: params.getParam(
-              'notification',
-              ParamType.Document,
-            ),
-            sender: params.getParam(
-              'sender',
-              ParamType.Document,
-            ),
-          ),
         ),
         FFRoute(
           name: 'EditProfile_main',
@@ -297,6 +284,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/myResponses',
           requireAuth: true,
           builder: (context, params) => MyResponsesWidget(),
+        ),
+        FFRoute(
+          name: 'userFullInfo',
+          path: '/userFullInfo',
+          asyncParams: {
+            'candidat': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => UserFullInfoWidget(
+            candidat: params.getParam(
+              'candidat',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

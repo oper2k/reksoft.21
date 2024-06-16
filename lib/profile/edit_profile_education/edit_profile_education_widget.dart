@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/placeholders/empty_profile_data/empty_profile_data_widget.dart';
 import '/profile/profile_components/education_item/education_item_widget.dart';
@@ -92,9 +92,9 @@ class _EditProfileEducationWidgetState
                           ),
                         ),
                         wrapWithModel(
-                          model: _model.headerMobileModel,
+                          model: _model.headerMobileOpenModel,
                           updateCallback: () => setState(() {}),
-                          child: HeaderMobileWidget(
+                          child: HeaderMobileOpenWidget(
                             currentPage: 0,
                           ),
                         ),
@@ -224,24 +224,26 @@ class _EditProfileEducationWidgetState
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              'Образование и курсы',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                            Expanded(
+                                              child: Text(
+                                                'Образование и курсы',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                              ),
                                             ),
                                             InkWell(
                                               splashColor: Colors.transparent,
@@ -531,7 +533,7 @@ class _EditProfileEducationWidgetState
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          6.0),
+                                                          10.0),
                                                   disabledColor:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -542,7 +544,26 @@ class _EditProfileEducationWidgetState
                                           ],
                                         ),
                                       ),
-                                    ],
+                                    ].addToEnd(SizedBox(
+                                        height: valueOrDefault<double>(
+                                      () {
+                                        if (MediaQuery.sizeOf(context).width <
+                                            kBreakpointSmall) {
+                                          return 45.0;
+                                        } else if (MediaQuery.sizeOf(context)
+                                                .width <
+                                            kBreakpointMedium) {
+                                          return 60.0;
+                                        } else if (MediaQuery.sizeOf(context)
+                                                .width <
+                                            kBreakpointLarge) {
+                                          return 60.0;
+                                        } else {
+                                          return 60.0;
+                                        }
+                                      }(),
+                                      60.0,
+                                    ))),
                                   ),
                                 ),
                               ),

@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/profile/profile_components/social_links_main/social_links_main_widget.dart';
 import 'dart:async';
@@ -41,8 +41,8 @@ class EditProfileMainModel extends FlutterFlowModel<EditProfileMainWidget> {
   final formKey = GlobalKey<FormState>();
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   // State field(s) for NameField widget.
   FocusNode? nameFieldFocusNode;
   TextEditingController? nameFieldTextController;
@@ -148,7 +148,7 @@ class EditProfileMainModel extends FlutterFlowModel<EditProfileMainWidget> {
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
     nameFieldTextControllerValidator = _nameFieldTextControllerValidator;
     surnameFieldTextControllerValidator = _surnameFieldTextControllerValidator;
     birthDateFieldTextControllerValidator =
@@ -164,7 +164,7 @@ class EditProfileMainModel extends FlutterFlowModel<EditProfileMainWidget> {
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
+    headerMobileOpenModel.dispose();
     nameFieldFocusNode?.dispose();
     nameFieldTextController?.dispose();
 

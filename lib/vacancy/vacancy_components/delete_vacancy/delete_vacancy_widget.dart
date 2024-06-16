@@ -1,7 +1,9 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/main/info_message/info_message_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +90,7 @@ class _DeleteVacancyWidgetState extends State<DeleteVacancyWidget> {
                         Navigator.pop(context);
                       },
                       child: Icon(
-                        Icons.close,
+                        FFIcons.kclose,
                         color: FlutterFlowTheme.of(context).gray,
                         size: 24.0,
                       ),
@@ -141,13 +143,16 @@ class _DeleteVacancyWidgetState extends State<DeleteVacancyWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            await widget.vacancy!.reference.delete();
+                            await widget.vacancy!.reference
+                                .update(createVacanciesRecordData(
+                              isDeleted: true,
+                            ));
                             Navigator.pop(context);
 
                             FFAppState().update(() {});
                             showDialog(
                               barrierColor:
-                                  FlutterFlowTheme.of(context).customColor1,
+                                  FlutterFlowTheme.of(context).modalBgnd,
                               context: context,
                               builder: (dialogContext) {
                                 return Dialog(

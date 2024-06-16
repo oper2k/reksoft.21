@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -74,9 +74,9 @@ class _NewsSingleWidgetState extends State<NewsSingleWidget> {
                       ),
                     ),
                     wrapWithModel(
-                      model: _model.headerMobileModel,
+                      model: _model.headerMobileOpenModel,
                       updateCallback: () => setState(() {}),
-                      child: HeaderMobileWidget(
+                      child: HeaderMobileOpenWidget(
                         currentPage: 1,
                       ),
                     ),
@@ -278,7 +278,52 @@ class _NewsSingleWidgetState extends State<NewsSingleWidget> {
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            40.0, 32.0, 40.0, 0.0),
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            32.0,
+                                            valueOrDefault<double>(
+                                              () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 20.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 40.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 40.0;
+                                                } else {
+                                                  return 40.0;
+                                                }
+                                              }(),
+                                              0.0,
+                                            ),
+                                            0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           crossAxisAlignment:
@@ -372,9 +417,16 @@ class _NewsSingleWidgetState extends State<NewsSingleWidget> {
                                                           },
                                                         ),
                                                       ),
-                                                      if (getCurrentTimestamp >=
-                                                          widget.newsDoc!
-                                                              .publishDate!)
+                                                      if ((getCurrentTimestamp >=
+                                                              widget.newsDoc!
+                                                                  .publishDate!) &&
+                                                          responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                            tablet: false,
+                                                            tabletLandscape:
+                                                                false,
+                                                          ))
                                                         Expanded(
                                                           child: Padding(
                                                             padding:
@@ -417,9 +469,128 @@ class _NewsSingleWidgetState extends State<NewsSingleWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                      if (getCurrentTimestamp <
-                                                          widget.newsDoc!
-                                                              .publishDate!)
+                                                      if ((getCurrentTimestamp <
+                                                              widget.newsDoc!
+                                                                  .publishDate!) &&
+                                                          responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                            tablet: false,
+                                                            tabletLandscape:
+                                                                false,
+                                                          ))
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              'Запланирована публикация: ${dateTimeFormat(
+                                                                'd MMMM в HH:mm',
+                                                                widget.newsDoc
+                                                                    ?.publishDate,
+                                                                locale: FFLocalizations.of(
+                                                                        context)
+                                                                    .languageCode,
+                                                              )}',
+                                                              textAlign:
+                                                                  TextAlign.end,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                    fontSize:
+                                                                        15.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      if ((getCurrentTimestamp >=
+                                                              widget.newsDoc!
+                                                                  .publishDate!) &&
+                                                          responsiveVisibility(
+                                                            context: context,
+                                                            desktop: false,
+                                                          ))
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              dateTimeFormat(
+                                                                'd MMMM',
+                                                                widget.newsDoc!
+                                                                    .createdTime!,
+                                                                locale: FFLocalizations.of(
+                                                                        context)
+                                                                    .languageCode,
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign.end,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
+                                                                    fontSize:
+                                                                        15.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      if ((getCurrentTimestamp <
+                                                              widget.newsDoc!
+                                                                  .publishDate!) &&
+                                                          responsiveVisibility(
+                                                            context: context,
+                                                            desktop: false,
+                                                          ))
                                                         Expanded(
                                                           child: Padding(
                                                             padding:
@@ -496,32 +667,34 @@ class _NewsSingleWidgetState extends State<NewsSingleWidget> {
                                                             size: 26.0,
                                                           ),
                                                         ),
-                                                      Text(
-                                                        valueOrDefault<String>(
-                                                          widget.newsDoc?.title,
-                                                          'Без названия',
+                                                      Expanded(
+                                                        child: Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            widget
+                                                                .newsDoc?.title,
+                                                            'Без названия',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily,
+                                                                fontSize: 20.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily),
+                                                              ),
                                                         ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  fontSize:
-                                                                      20.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
                                                       ),
                                                     ],
                                                   ),
@@ -567,7 +740,7 @@ class _NewsSingleWidgetState extends State<NewsSingleWidget> {
                                                         widget.newsDoc!.image,
                                                       ),
                                                       width: double.infinity,
-                                                      height: 222.0,
+                                                      height: 280.0,
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),

@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/vacancy/vacancy_components/vacancy_a_i_create/vacancy_a_i_create_widget.dart';
 import '/vacancy/vacancy_components/vacancy_menu/vacancy_menu_widget.dart';
@@ -107,9 +107,9 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                         ),
                       ),
                       wrapWithModel(
-                        model: _model.headerMobileModel,
+                        model: _model.headerMobileOpenModel,
                         updateCallback: () => setState(() {}),
-                        child: HeaderMobileWidget(
+                        child: HeaderMobileOpenWidget(
                           currentPage: 2,
                         ),
                       ),
@@ -272,7 +272,7 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 36.0, 0.0, 60.0),
+                                        16.0, 36.0, 16.0, 60.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -298,10 +298,17 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 20.0, 0.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                          child: Wrap(
+                                            spacing: 18.0,
+                                            runSpacing: 18.0,
+                                            alignment: WrapAlignment.start,
+                                            crossAxisAlignment:
+                                                WrapCrossAlignment.start,
+                                            direction: Axis.horizontal,
+                                            runAlignment: WrapAlignment.start,
+                                            verticalDirection:
+                                                VerticalDirection.down,
+                                            clipBehavior: Clip.none,
                                             children: [
                                               FFButtonWidget(
                                                 onPressed: () async {
@@ -361,7 +368,7 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                                       barrierColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .customColor1,
+                                                              .modalBgnd,
                                                       context: context,
                                                       builder: (dialogContext) {
                                                         return Dialog(
@@ -444,7 +451,7 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                                   showLoadingIndicator: false,
                                                 ),
                                               ),
-                                            ].divide(SizedBox(width: 20.0)),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -478,6 +485,7 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                     stream: queryVacanciesRecord(
                                       queryBuilder: (vacanciesRecord) =>
                                           vacanciesRecord
+                                              .orderBy('is_Deleted')
                                               .orderBy('created_time'),
                                     ),
                                     builder: (context, snapshot) {
@@ -513,7 +521,58 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  60.0, 40.0, 60.0, 40.0),
+                                                  valueOrDefault<double>(
+                                                    () {
+                                                      if (MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width <
+                                                          kBreakpointSmall) {
+                                                        return 16.0;
+                                                      } else if (MediaQuery
+                                                                  .sizeOf(
+                                                                      context)
+                                                              .width <
+                                                          kBreakpointMedium) {
+                                                        return 60.0;
+                                                      } else if (MediaQuery
+                                                                  .sizeOf(
+                                                                      context)
+                                                              .width <
+                                                          kBreakpointLarge) {
+                                                        return 60.0;
+                                                      } else {
+                                                        return 60.0;
+                                                      }
+                                                    }(),
+                                                    60.0,
+                                                  ),
+                                                  40.0,
+                                                  valueOrDefault<double>(
+                                                    () {
+                                                      if (MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width <
+                                                          kBreakpointSmall) {
+                                                        return 16.0;
+                                                      } else if (MediaQuery
+                                                                  .sizeOf(
+                                                                      context)
+                                                              .width <
+                                                          kBreakpointMedium) {
+                                                        return 60.0;
+                                                      } else if (MediaQuery
+                                                                  .sizeOf(
+                                                                      context)
+                                                              .width <
+                                                          kBreakpointLarge) {
+                                                        return 60.0;
+                                                      } else {
+                                                        return 60.0;
+                                                      }
+                                                    }(),
+                                                    60.0,
+                                                  ),
+                                                  40.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
@@ -625,226 +684,71 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          12.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child:
-                                                                        Builder(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              InkWell(
-                                                                        splashColor:
-                                                                            Colors.transparent,
-                                                                        focusColor:
-                                                                            Colors.transparent,
-                                                                        hoverColor:
-                                                                            Colors.transparent,
-                                                                        highlightColor:
-                                                                            Colors.transparent,
-                                                                        onTap:
-                                                                            () async {
-                                                                          if (vacancyItem.jobTitle !=
-                                                                              'Создается с ИИ...') {
-                                                                            context.pushNamed(
-                                                                              'Vacancy_fullInfo',
-                                                                              queryParameters: {
-                                                                                'vacancy': serializeParam(
-                                                                                  vacancyItem,
-                                                                                  ParamType.Document,
-                                                                                ),
-                                                                              }.withoutNulls,
-                                                                              extra: <String, dynamic>{
-                                                                                'vacancy': vacancyItem,
-                                                                              },
-                                                                            );
-                                                                          } else {
-                                                                            showDialog(
-                                                                              barrierColor: Colors.transparent,
-                                                                              context: context,
-                                                                              builder: (dialogContext) {
-                                                                                return Dialog(
-                                                                                  elevation: 0,
-                                                                                  insetPadding: EdgeInsets.zero,
-                                                                                  backgroundColor: Colors.transparent,
-                                                                                  alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                  child: GestureDetector(
-                                                                                    onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
-                                                                                    child: InfoMessageWidget(
-                                                                                      text: 'Дождитесь генерации вакансии',
-                                                                                      isError: true,
-                                                                                    ),
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                            ).then((value) =>
-                                                                                setState(() {}));
-                                                                          }
-                                                                        },
-                                                                        child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            vacancyItem.jobTitle,
-                                                                            'Без имени',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: vacancyItem.jobTitle == 'Создается с ИИ...' ? FlutterFlowTheme.of(context).secondary : FlutterFlowTheme.of(context).primaryText,
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child:
-                                                                        FutureBuilder<
-                                                                            int>(
-                                                                      future:
-                                                                          queryResponseRecordCount(
-                                                                        queryBuilder:
-                                                                            (responseRecord) =>
-                                                                                responseRecord.where(
-                                                                          'vacancy',
-                                                                          isEqualTo:
-                                                                              vacancyItem.reference,
-                                                                        ),
-                                                                      ),
-                                                                      builder:
-                                                                          (context,
-                                                                              snapshot) {
-                                                                        // Customize what your widget looks like when it's loading.
-                                                                        if (!snapshot
-                                                                            .hasData) {
-                                                                          return Center(
-                                                                            child:
-                                                                                SizedBox(
-                                                                              width: 15.0,
-                                                                              height: 15.0,
-                                                                              child: CircularProgressIndicator(
-                                                                                valueColor: AlwaysStoppedAnimation<Color>(
-                                                                                  FlutterFlowTheme.of(context).primary,
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                        }
-                                                                        int textCount =
-                                                                            snapshot.data!;
-                                                                        return Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            textCount.toString(),
-                                                                            '0',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.normal,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        );
-                                                                      },
-                                                                    ),
-                                                                  ),
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        vacancyItem
-                                                                            .viewsCount
-                                                                            .toString(),
-                                                                        '0',
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                            fontSize:
-                                                                                16.0,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FontWeight.normal,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  Container(
-                                                                    width:
-                                                                        100.0,
-                                                                    height:
-                                                                        50.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                    ),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        if (vacancyItem.jobTitle ==
-                                                                            'Создается с ИИ...')
-                                                                          Align(
-                                                                            alignment:
-                                                                                AlignmentDirectional(1.0, 0.0),
-                                                                            child:
-                                                                                Lottie.asset(
-                                                                              'assets/lottie_animations/loading.json',
-                                                                              width: 50.0,
-                                                                              height: 50.0,
-                                                                              fit: BoxFit.contain,
-                                                                              animate: true,
-                                                                            ),
-                                                                          ),
-                                                                        if (vacancyItem.jobTitle !=
-                                                                            'Создается с ИИ...')
+                                                            Opacity(
+                                                              opacity: vacancyItem
+                                                                      .isDeleted
+                                                                  ? 0.3
+                                                                  : 1.0,
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            12.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
                                                                           Builder(
-                                                                            builder: (context) =>
+                                                                        builder:
+                                                                            (context) =>
                                                                                 Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
-                                                                              child: InkWell(
-                                                                                splashColor: Colors.transparent,
-                                                                                focusColor: Colors.transparent,
-                                                                                hoverColor: Colors.transparent,
-                                                                                highlightColor: Colors.transparent,
-                                                                                onTap: () async {
-                                                                                  await showDialog(
-                                                                                    barrierColor: FlutterFlowTheme.of(context).customColor1,
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              6.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              InkWell(
+                                                                            splashColor:
+                                                                                Colors.transparent,
+                                                                            focusColor:
+                                                                                Colors.transparent,
+                                                                            hoverColor:
+                                                                                Colors.transparent,
+                                                                            highlightColor:
+                                                                                Colors.transparent,
+                                                                            onTap:
+                                                                                () async {
+                                                                              if (vacancyItem.jobTitle != 'Создается с ИИ...') {
+                                                                                if (!vacancyItem.isDeleted) {
+                                                                                  context.pushNamed(
+                                                                                    'Vacancy_fullInfo',
+                                                                                    queryParameters: {
+                                                                                      'vacancy': serializeParam(
+                                                                                        vacancyItem,
+                                                                                        ParamType.Document,
+                                                                                      ),
+                                                                                    }.withoutNulls,
+                                                                                    extra: <String, dynamic>{
+                                                                                      'vacancy': vacancyItem,
+                                                                                    },
+                                                                                  );
+                                                                                } else {
+                                                                                  showDialog(
+                                                                                    barrierColor: Colors.transparent,
                                                                                     context: context,
                                                                                     builder: (dialogContext) {
                                                                                       return Dialog(
@@ -854,33 +758,220 @@ class _VacancyListHrWidgetState extends State<VacancyListHrWidget> {
                                                                                         alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                                         child: GestureDetector(
                                                                                           onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
-                                                                                          child: VacancyMenuWidget(
-                                                                                            vacancy: vacancyItem,
+                                                                                          child: InfoMessageWidget(
+                                                                                            text: 'Вакансия удалена',
+                                                                                            isError: true,
                                                                                           ),
                                                                                         ),
                                                                                       );
                                                                                     },
                                                                                   ).then((value) => setState(() {}));
-                                                                                },
-                                                                                child: Container(
-                                                                                  width: 40.0,
-                                                                                  height: 40.0,
-                                                                                  clipBehavior: Clip.antiAlias,
-                                                                                  decoration: BoxDecoration(
-                                                                                    shape: BoxShape.circle,
+                                                                                }
+
+                                                                                return;
+                                                                              } else {
+                                                                                showDialog(
+                                                                                  barrierColor: Colors.transparent,
+                                                                                  context: context,
+                                                                                  builder: (dialogContext) {
+                                                                                    return Dialog(
+                                                                                      elevation: 0,
+                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                      child: GestureDetector(
+                                                                                        onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                        child: InfoMessageWidget(
+                                                                                          text: 'Дождитесь генерации вакансии',
+                                                                                          isError: true,
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                ).then((value) => setState(() {}));
+                                                                              }
+                                                                            },
+                                                                            child:
+                                                                                Text(
+                                                                              valueOrDefault<String>(
+                                                                                vacancyItem.jobTitle,
+                                                                                'Без имени',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                    color: vacancyItem.jobTitle == 'Создается с ИИ...' ? FlutterFlowTheme.of(context).secondary : FlutterFlowTheme.of(context).primaryText,
+                                                                                    fontSize: 16.0,
+                                                                                    letterSpacing: 0.0,
+                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                   ),
-                                                                                  child: SvgPicture.asset(
-                                                                                    'assets/images/edit_news_icon.svg',
-                                                                                    fit: BoxFit.contain,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child: FutureBuilder<
+                                                                          int>(
+                                                                        future:
+                                                                            queryResponseRecordCount(
+                                                                          queryBuilder: (responseRecord) =>
+                                                                              responseRecord.where(
+                                                                            'vacancy',
+                                                                            isEqualTo:
+                                                                                vacancyItem.reference,
+                                                                          ),
+                                                                        ),
+                                                                        builder:
+                                                                            (context,
+                                                                                snapshot) {
+                                                                          // Customize what your widget looks like when it's loading.
+                                                                          if (!snapshot
+                                                                              .hasData) {
+                                                                            return Center(
+                                                                              child: SizedBox(
+                                                                                width: 15.0,
+                                                                                height: 15.0,
+                                                                                child: CircularProgressIndicator(
+                                                                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                    FlutterFlowTheme.of(context).primary,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                          int textCount =
+                                                                              snapshot.data!;
+                                                                          return Text(
+                                                                            valueOrDefault<String>(
+                                                                              textCount.toString(),
+                                                                              '0',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                ),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
+                                                                          Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          vacancyItem
+                                                                              .viewsCount
+                                                                              .toString(),
+                                                                          '0',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.normal,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width:
+                                                                          100.0,
+                                                                      height:
+                                                                          50.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                      ),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          if ((vacancyItem.jobTitle == 'Создается с ИИ...') &&
+                                                                              !vacancyItem.isDeleted)
+                                                                            Align(
+                                                                              alignment: AlignmentDirectional(1.0, 0.0),
+                                                                              child: Lottie.asset(
+                                                                                'assets/lottie_animations/loading.json',
+                                                                                width: 50.0,
+                                                                                height: 50.0,
+                                                                                fit: BoxFit.contain,
+                                                                                animate: true,
+                                                                              ),
+                                                                            ),
+                                                                          if ((vacancyItem.jobTitle != 'Создается с ИИ...') &&
+                                                                              !vacancyItem.isDeleted)
+                                                                            Builder(
+                                                                              builder: (context) => Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
+                                                                                child: InkWell(
+                                                                                  splashColor: Colors.transparent,
+                                                                                  focusColor: Colors.transparent,
+                                                                                  hoverColor: Colors.transparent,
+                                                                                  highlightColor: Colors.transparent,
+                                                                                  onTap: () async {
+                                                                                    await showDialog(
+                                                                                      barrierColor: FlutterFlowTheme.of(context).modalBgnd,
+                                                                                      context: context,
+                                                                                      builder: (dialogContext) {
+                                                                                        return Dialog(
+                                                                                          elevation: 0,
+                                                                                          insetPadding: EdgeInsets.zero,
+                                                                                          backgroundColor: Colors.transparent,
+                                                                                          alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                          child: GestureDetector(
+                                                                                            onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                            child: VacancyMenuWidget(
+                                                                                              vacancy: vacancyItem,
+                                                                                            ),
+                                                                                          ),
+                                                                                        );
+                                                                                      },
+                                                                                    ).then((value) => setState(() {}));
+                                                                                  },
+                                                                                  child: Container(
+                                                                                    width: 40.0,
+                                                                                    height: 40.0,
+                                                                                    clipBehavior: Clip.antiAlias,
+                                                                                    decoration: BoxDecoration(
+                                                                                      shape: BoxShape.circle,
+                                                                                    ),
+                                                                                    child: SvgPicture.asset(
+                                                                                      'assets/images/edit_news_icon.svg',
+                                                                                      fit: BoxFit.contain,
+                                                                                    ),
                                                                                   ),
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                          ),
-                                                                      ],
+                                                                          if (vacancyItem
+                                                                              .isDeleted)
+                                                                            Text(
+                                                                              'Вакансия\nудалена',
+                                                                              textAlign: TextAlign.center,
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                    fontSize: 12.0,
+                                                                                    letterSpacing: 0.0,
+                                                                                    fontWeight: FontWeight.normal,
+                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                  ),
+                                                                            ),
+                                                                        ],
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                             Divider(

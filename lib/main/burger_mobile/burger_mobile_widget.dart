@@ -1,7 +1,7 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/main/header_mobile_close/header_mobile_close_widget.dart';
 import '/profile/profile_components/upload_resume/upload_resume_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,76 +57,11 @@ class _BurgerMobileWidgetState extends State<BurgerMobileWidget> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 38.0, 0.0, 0.0),
-            child: Container(
-              width: double.infinity,
-              height: 46.0,
-              decoration: BoxDecoration(),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 14.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/images/logo.png.png',
-                      height: 20.0,
-                      fit: BoxFit.cover,
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        AuthUserStreamWidget(
-                          builder: (context) => Text(
-                            loggedIn ? currentUserDisplayName : 'Войти',
-                            style: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleSmallFamily,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleSmallFamily),
-                                ),
-                          ),
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('Notifications');
-                          },
-                          child: Icon(
-                            Icons.notifications_sharp,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.close,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                        ),
-                      ].divide(SizedBox(width: 6.0)),
-                    ),
-                  ],
-                ),
-              ),
+          wrapWithModel(
+            model: _model.headerMobileCloseModel,
+            updateCallback: () => setState(() {}),
+            child: HeaderMobileCloseWidget(
+              currentPage: 10,
             ),
           ),
           Padding(
@@ -253,7 +188,7 @@ class _BurgerMobileWidgetState extends State<BurgerMobileWidget> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       await showDialog(
-                        barrierColor: FlutterFlowTheme.of(context).customColor1,
+                        barrierColor: FlutterFlowTheme.of(context).modalBgnd,
                         context: context,
                         builder: (dialogContext) {
                           return Dialog(
@@ -285,7 +220,7 @@ class _BurgerMobileWidgetState extends State<BurgerMobileWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.cloud_download,
+                              FFIcons.kdownload,
                               color: FlutterFlowTheme.of(context).darkBlue,
                               size: 24.0,
                             ),

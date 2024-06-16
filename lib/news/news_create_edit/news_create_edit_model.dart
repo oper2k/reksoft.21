@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/news/news_components/upload_image/upload_image_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -39,8 +39,8 @@ class NewsCreateEditModel extends FlutterFlowModel<NewsCreateEditWidget> {
   final formKey = GlobalKey<FormState>();
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   // State field(s) for NewsName widget.
   FocusNode? newsNameFocusNode;
   TextEditingController? newsNameTextController;
@@ -90,7 +90,7 @@ class NewsCreateEditModel extends FlutterFlowModel<NewsCreateEditWidget> {
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
     newsNameTextControllerValidator = _newsNameTextControllerValidator;
     shortDescriptionTextControllerValidator =
         _shortDescriptionTextControllerValidator;
@@ -102,7 +102,7 @@ class NewsCreateEditModel extends FlutterFlowModel<NewsCreateEditWidget> {
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
+    headerMobileOpenModel.dispose();
     newsNameFocusNode?.dispose();
     newsNameTextController?.dispose();
 

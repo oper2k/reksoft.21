@@ -8,7 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/placeholders/empty_news_list/empty_news_list_widget.dart';
 import '/profile/profile_components/upload_resume/upload_resume_widget.dart';
@@ -31,8 +31,8 @@ class VacancyListApplicantModel
   final unfocusNode = FocusNode();
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   // State field(s) for keywordsSearch widget.
   FocusNode? keywordsSearchFocusNode;
   TextEditingController? keywordsSearchTextController;
@@ -53,7 +53,7 @@ class VacancyListApplicantModel
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
     footerModel = createModel(context, () => FooterModel());
   }
 
@@ -61,7 +61,7 @@ class VacancyListApplicantModel
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
+    headerMobileOpenModel.dispose();
     keywordsSearchFocusNode?.dispose();
     keywordsSearchTextController?.dispose();
 

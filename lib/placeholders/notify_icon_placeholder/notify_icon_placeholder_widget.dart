@@ -7,12 +7,7 @@ import 'notify_icon_placeholder_model.dart';
 export 'notify_icon_placeholder_model.dart';
 
 class NotifyIconPlaceholderWidget extends StatefulWidget {
-  const NotifyIconPlaceholderWidget({
-    super.key,
-    Color? color,
-  }) : this.color = color ?? const Color(0xFFA7B4CC);
-
-  final Color color;
+  const NotifyIconPlaceholderWidget({super.key});
 
   @override
   State<NotifyIconPlaceholderWidget> createState() =>
@@ -47,8 +42,8 @@ class _NotifyIconPlaceholderWidgetState
   @override
   Widget build(BuildContext context) {
     return Icon(
-      Icons.notifications_sharp,
-      color: widget.color,
+      FFIcons.knotifications,
+      color: FlutterFlowTheme.of(context).gray,
       size: 24.0,
     );
   }

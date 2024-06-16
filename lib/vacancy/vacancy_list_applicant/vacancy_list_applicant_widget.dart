@@ -8,7 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/placeholders/empty_news_list/empty_news_list_widget.dart';
 import '/profile/profile_components/upload_resume/upload_resume_widget.dart';
@@ -51,7 +51,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
     _model.keywordsSearchFocusNode ??= FocusNode();
 
     animationsMap.addAll({
-      'containerOnPageLoadAnimation': AnimationInfo(
+      'containerOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           ScaleEffect(
@@ -62,6 +62,23 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
             end: Offset(1.0, 1.0),
           ),
         ],
+      ),
+      'containerOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 200.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: null,
       ),
     });
 
@@ -106,9 +123,9 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                       ),
                     ),
                     wrapWithModel(
-                      model: _model.headerMobileModel,
+                      model: _model.headerMobileOpenModel,
                       updateCallback: () => setState(() {}),
-                      child: HeaderMobileWidget(
+                      child: HeaderMobileOpenWidget(
                         currentPage: 2,
                       ),
                     ),
@@ -301,7 +318,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .headlineMediumFamily,
                                             color: FlutterFlowTheme.of(context)
-                                                .info,
+                                                .white,
                                             letterSpacing: 0.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
@@ -331,7 +348,8 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
-                                      enableDrag: false,
+                                      barrierColor: FlutterFlowTheme.of(context)
+                                          .modalBgnd,
                                       context: context,
                                       builder: (context) {
                                         return GestureDetector(
@@ -345,14 +363,19 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                           child: Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
-                                            child: FilterMobileWidget(),
+                                            child: Container(
+                                              height: MediaQuery.sizeOf(context)
+                                                      .height *
+                                                  0.9,
+                                              child: FilterMobileWidget(),
+                                            ),
                                           ),
                                         );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
                                   child: Icon(
-                                    Icons.filter_list_rounded,
+                                    FFIcons.ksort,
                                     color: FlutterFlowTheme.of(context).gray,
                                     size: 24.0,
                                   ),
@@ -617,7 +640,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                   barrierColor:
                                                                       FlutterFlowTheme.of(
                                                                               context)
-                                                                          .customColor1,
+                                                                          .modalBgnd,
                                                                   context:
                                                                       context,
                                                                   builder:
@@ -695,11 +718,11 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                           .center,
                                                                   children: [
                                                                     Icon(
-                                                                      Icons
-                                                                          .insert_link_rounded,
+                                                                      FFIcons
+                                                                          .kattachment,
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .info,
+                                                                          .white,
                                                                       size:
                                                                           20.0,
                                                                     ),
@@ -716,7 +739,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                             .headlineMedium
                                                                             .override(
                                                                               fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
-                                                                              color: FlutterFlowTheme.of(context).info,
+                                                                              color: FlutterFlowTheme.of(context).white,
                                                                               fontSize: 13.0,
                                                                               letterSpacing: 0.0,
                                                                               useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).headlineMediumFamily),
@@ -826,7 +849,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                   .bodyMediumFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .gray,
+                                                              .primaryText,
                                                           fontSize: 13.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -927,7 +950,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                   .bodyMediumFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .gray,
+                                                              .primaryText,
                                                           fontSize: 13.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -1026,7 +1049,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                   .bodyMediumFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .gray,
+                                                              .primaryText,
                                                           fontSize: 13.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -1194,7 +1217,7 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                         ),
                                                                       ).animateOnPageLoad(
                                                                           animationsMap[
-                                                                              'containerOnPageLoadAnimation']!),
+                                                                              'containerOnPageLoadAnimation1']!),
                                                                   ],
                                                                 ),
                                                               ],
@@ -1406,9 +1429,13 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                         Expanded(
                                           child: Builder(
                                             builder: (context) {
-                                              final vacancy =
-                                                  getVacanciesVacanciesRecordList
-                                                      .toList();
+                                              final vacancy = functions
+                                                  .reverseListVacansion(
+                                                      getVacanciesVacanciesRecordList
+                                                          .sortedList((e) =>
+                                                              e.createdTime!)
+                                                          .toList())
+                                                  .toList();
                                               if (vacancy.isEmpty) {
                                                 return EmptyNewsListWidget();
                                               }
@@ -1435,13 +1462,46 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                       child: Stack(
                                                         children: [
                                                           Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        40.0,
-                                                                        32.0,
-                                                                        40.0,
-                                                                        32.0),
+                                                            padding: EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                      () {
+                                                                        if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointSmall) {
+                                                                          return 20.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointMedium) {
+                                                                          return 40.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointLarge) {
+                                                                          return 40.0;
+                                                                        } else {
+                                                                          return 40.0;
+                                                                        }
+                                                                      }(),
+                                                                      0.0,
+                                                                    ),
+                                                                    32.0,
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                      () {
+                                                                        if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointSmall) {
+                                                                          return 20.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointMedium) {
+                                                                          return 40.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointLarge) {
+                                                                          return 40.0;
+                                                                        } else {
+                                                                          return 40.0;
+                                                                        }
+                                                                      }(),
+                                                                      0.0,
+                                                                    ),
+                                                                    32.0),
                                                             child: Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
@@ -1649,120 +1709,141 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                                     },
                                                                   ),
                                                                 ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          18.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Wrap(
-                                                                    spacing:
-                                                                        10.0,
-                                                                    runSpacing:
-                                                                        10.0,
-                                                                    alignment:
-                                                                        WrapAlignment
-                                                                            .start,
-                                                                    crossAxisAlignment:
-                                                                        WrapCrossAlignment
-                                                                            .start,
-                                                                    direction: Axis
-                                                                        .horizontal,
-                                                                    runAlignment:
-                                                                        WrapAlignment
-                                                                            .start,
-                                                                    verticalDirection:
-                                                                        VerticalDirection
-                                                                            .down,
-                                                                    clipBehavior:
-                                                                        Clip.none,
-                                                                    children: [
-                                                                      if (valueOrDefault(
-                                                                              currentUserDocument?.role,
-                                                                              '') ==
-                                                                          'applicant')
-                                                                        Opacity(
-                                                                          opacity:
-                                                                              valueOrDefault<double>(
-                                                                            (currentUserDocument?.responsedVacanciesList?.toList() ?? []).contains(vacancyItem.reference)
-                                                                                ? 0.3
-                                                                                : 1.0,
-                                                                            1.0,
+                                                                if (vacancyItem
+                                                                    .isDeleted)
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            18.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      'Вы не можете откликнуться на вакансию, так как она была удалена',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).error,
+                                                                            fontSize:
+                                                                                16.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FontWeight.normal,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                           ),
-                                                                          child:
-                                                                              AuthUserStreamWidget(
-                                                                            builder: (context) =>
-                                                                                VacancyResponseBtnWidget(
-                                                                              key: Key('Keyg8k_${vacancyIndex}_of_${vacancy.length}'),
-                                                                              vacancy: vacancyItem,
+                                                                    ),
+                                                                  ),
+                                                                if (!vacancyItem
+                                                                    .isDeleted)
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            18.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Wrap(
+                                                                      spacing:
+                                                                          10.0,
+                                                                      runSpacing:
+                                                                          10.0,
+                                                                      alignment:
+                                                                          WrapAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          WrapCrossAlignment
+                                                                              .start,
+                                                                      direction:
+                                                                          Axis.horizontal,
+                                                                      runAlignment:
+                                                                          WrapAlignment
+                                                                              .start,
+                                                                      verticalDirection:
+                                                                          VerticalDirection
+                                                                              .down,
+                                                                      clipBehavior:
+                                                                          Clip.none,
+                                                                      children: [
+                                                                        if (valueOrDefault(currentUserDocument?.role,
+                                                                                '') ==
+                                                                            'applicant')
+                                                                          Opacity(
+                                                                            opacity:
+                                                                                valueOrDefault<double>(
+                                                                              (currentUserDocument?.responsedVacanciesList?.toList() ?? []).contains(vacancyItem.reference) ? 0.3 : 1.0,
+                                                                              1.0,
                                                                             ),
-                                                                          ),
-                                                                        ),
-                                                                      Builder(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                InkWell(
-                                                                          splashColor:
-                                                                              Colors.transparent,
-                                                                          focusColor:
-                                                                              Colors.transparent,
-                                                                          hoverColor:
-                                                                              Colors.transparent,
-                                                                          highlightColor:
-                                                                              Colors.transparent,
-                                                                          onTap:
-                                                                              () async {
-                                                                            await Clipboard.setData(ClipboardData(text: 'https://bytebosses.ru/vacancyFullInfo?vacancy=${vacancyItem.reference.id}'));
-                                                                            showDialog(
-                                                                              barrierColor: Colors.transparent,
-                                                                              context: context,
-                                                                              builder: (dialogContext) {
-                                                                                return Dialog(
-                                                                                  elevation: 0,
-                                                                                  insetPadding: EdgeInsets.zero,
-                                                                                  backgroundColor: Colors.transparent,
-                                                                                  alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                  child: GestureDetector(
-                                                                                    onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
-                                                                                    child: InfoMessageWidget(
-                                                                                      text: 'Ссылка на вакансию скопирована',
-                                                                                    ),
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                            ).then((value) =>
-                                                                                setState(() {}));
-                                                                          },
-                                                                          child:
-                                                                              Container(
-                                                                            width:
-                                                                                60.0,
-                                                                            height:
-                                                                                50.0,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              borderRadius: BorderRadius.circular(8.0),
-                                                                              border: Border.all(
-                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 1.0,
+                                                                            child:
+                                                                                AuthUserStreamWidget(
+                                                                              builder: (context) => VacancyResponseBtnWidget(
+                                                                                key: Key('Keyg8k_${vacancyIndex}_of_${vacancy.length}'),
+                                                                                vacancy: vacancyItem,
                                                                               ),
                                                                             ),
-                                                                            alignment:
-                                                                                AlignmentDirectional(0.0, 0.0),
+                                                                          ),
+                                                                        Builder(
+                                                                          builder: (context) =>
+                                                                              InkWell(
+                                                                            splashColor:
+                                                                                Colors.transparent,
+                                                                            focusColor:
+                                                                                Colors.transparent,
+                                                                            hoverColor:
+                                                                                Colors.transparent,
+                                                                            highlightColor:
+                                                                                Colors.transparent,
+                                                                            onTap:
+                                                                                () async {
+                                                                              await Clipboard.setData(ClipboardData(text: 'https://bytebosses.ru/vacancyFullInfo?vacancy=${vacancyItem.reference.id}'));
+                                                                              showDialog(
+                                                                                barrierColor: Colors.transparent,
+                                                                                context: context,
+                                                                                builder: (dialogContext) {
+                                                                                  return Dialog(
+                                                                                    elevation: 0,
+                                                                                    insetPadding: EdgeInsets.zero,
+                                                                                    backgroundColor: Colors.transparent,
+                                                                                    alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                    child: GestureDetector(
+                                                                                      onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                      child: InfoMessageWidget(
+                                                                                        text: 'Ссылка на вакансию скопирована',
+                                                                                      ),
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              ).then((value) => setState(() {}));
+                                                                            },
                                                                             child:
-                                                                                Icon(
-                                                                              Icons.share_sharp,
-                                                                              color: FlutterFlowTheme.of(context).primary,
-                                                                              size: 20.0,
+                                                                                Container(
+                                                                              width: 60.0,
+                                                                              height: 50.0,
+                                                                              decoration: BoxDecoration(
+                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                                border: Border.all(
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                  width: 1.0,
+                                                                                ),
+                                                                              ),
+                                                                              alignment: AlignmentDirectional(0.0, 0.0),
+                                                                              child: Icon(
+                                                                                Icons.share_sharp,
+                                                                                color: FlutterFlowTheme.of(context).blueNight,
+                                                                                size: 20.0,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -1816,6 +1897,36 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                                           ),
                                                         ],
                                                       ),
+                                                    ).animateOnPageLoad(
+                                                      animationsMap[
+                                                          'containerOnPageLoadAnimation3']!,
+                                                      effects: [
+                                                        VisibilityEffect(
+                                                            duration: max(
+                                                                    1.0,
+                                                                    [
+                                                                          (100 * vacancyIndex)
+                                                                              .toDouble()
+                                                                        ].reduce((curr, next) => curr <
+                                                                                next
+                                                                            ? curr
+                                                                            : next) ??
+                                                                        0)
+                                                                .toInt()
+                                                                .ms),
+                                                        MoveEffect(
+                                                          curve:
+                                                              Curves.easeInOut,
+                                                          delay: (100 *
+                                                                  vacancyIndex)
+                                                              .toDouble()
+                                                              .ms,
+                                                          duration: 600.0.ms,
+                                                          begin: Offset(
+                                                              0.0, 100.0),
+                                                          end: Offset(0.0, 0.0),
+                                                        ),
+                                                      ],
                                                     );
                                                   })
                                                       .divide(SizedBox(
@@ -1829,7 +1940,8 @@ class _VacancyListApplicantWidgetState extends State<VacancyListApplicantWidget>
                                         ),
                                       ],
                                     ),
-                                  );
+                                  ).animateOnPageLoad(animationsMap[
+                                      'containerOnPageLoadAnimation2']!);
                                 },
                               ),
                             ),

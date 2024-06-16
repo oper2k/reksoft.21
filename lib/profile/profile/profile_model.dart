@@ -8,7 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/placeholders/empty_profile_data/empty_profile_data_widget.dart';
 import '/profile/profile_components/change_password/change_password_widget.dart';
@@ -36,8 +36,8 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   final unfocusNode = FocusNode();
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -45,8 +45,16 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
 
   // Stores action output result for [Backend Call - Read Document] action in Button widget.
   VacanciesRecord? vacancy;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered1 = false;
   // State field(s) for Switch widget.
   bool? switchValue;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered2 = false;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered3 = false;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered4 = false;
   // State field(s) for PhoneField widget.
   FocusNode? phoneFieldFocusNode;
   TextEditingController? phoneFieldTextController;
@@ -56,14 +64,14 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
+    headerMobileOpenModel.dispose();
     phoneFieldFocusNode?.dispose();
     phoneFieldTextController?.dispose();
   }

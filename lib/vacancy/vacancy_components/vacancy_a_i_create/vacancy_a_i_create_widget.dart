@@ -114,7 +114,7 @@ class _VacancyAICreateWidgetState extends State<VacancyAICreateWidget>
                       height: 30.0,
                       decoration: BoxDecoration(),
                       child: Icon(
-                        Icons.close,
+                        FFIcons.kclose,
                         color: FlutterFlowTheme.of(context).gray,
                         size: 24.0,
                       ),
@@ -240,6 +240,8 @@ class _VacancyAICreateWidgetState extends State<VacancyAICreateWidget>
                               salaryMin: 100000,
                               salaryForFilter: 100000,
                               createdTime: getCurrentTimestamp,
+                              isDeleted: false,
+                              hrEmail: currentUserEmail,
                             ));
                             _model.newVacancy =
                                 VacanciesRecord.getDocumentFromData(
@@ -254,6 +256,8 @@ class _VacancyAICreateWidgetState extends State<VacancyAICreateWidget>
                                       salaryMin: 100000,
                                       salaryForFilter: 100000,
                                       createdTime: getCurrentTimestamp,
+                                      isDeleted: false,
+                                      hrEmail: currentUserEmail,
                                     ),
                                     vacanciesRecordReference);
                             unawaited(
@@ -271,7 +275,7 @@ class _VacancyAICreateWidgetState extends State<VacancyAICreateWidget>
                             Navigator.pop(context);
                             showDialog(
                               barrierColor:
-                                  FlutterFlowTheme.of(context).customColor1,
+                                  FlutterFlowTheme.of(context).modalBgnd,
                               context: context,
                               builder: (dialogContext) {
                                 return Dialog(

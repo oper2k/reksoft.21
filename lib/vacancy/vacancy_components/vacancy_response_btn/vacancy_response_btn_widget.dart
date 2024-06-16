@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/info_message/info_message_widget.dart';
-import '/vacancy/vacancy_components/vacancy_response/vacancy_response_widget.dart';
+import '/vacancy/vacancy_response/vacancy_response_widget.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ class _VacancyResponseBtnWidgetState extends State<VacancyResponseBtnWidget> {
           if ((currentUserDocument?.responsedVacanciesList?.toList() ?? [])
               .contains(widget.vacancy?.reference)) {
             showDialog(
-              barrierColor: FlutterFlowTheme.of(context).customColor1,
+              barrierColor: FlutterFlowTheme.of(context).modalBgnd,
               context: context,
               builder: (dialogContext) {
                 return Dialog(
@@ -92,7 +92,7 @@ class _VacancyResponseBtnWidgetState extends State<VacancyResponseBtnWidget> {
             );
           }
           await showDialog(
-            barrierColor: FlutterFlowTheme.of(context).customColor1,
+            barrierColor: FlutterFlowTheme.of(context).modalBgnd,
             context: context,
             builder: (dialogContext) {
               return Dialog(

@@ -8,7 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
@@ -44,8 +44,8 @@ class VacancyCreateEditModel extends FlutterFlowModel<VacancyCreateEditWidget> {
   final formKey = GlobalKey<FormState>();
   // Model for HeaderDesktop component.
   late HeaderDesktopModel headerDesktopModel;
-  // Model for HeaderMobile component.
-  late HeaderMobileModel headerMobileModel;
+  // Model for HeaderMobileOpen component.
+  late HeaderMobileOpenModel headerMobileOpenModel;
   // State field(s) for DolzhnostField widget.
   FocusNode? dolzhnostFieldFocusNode;
   TextEditingController? dolzhnostFieldTextController;
@@ -119,6 +119,20 @@ class VacancyCreateEditModel extends FlutterFlowModel<VacancyCreateEditWidget> {
   FocusNode? salaryMaxFocusNode;
   TextEditingController? salaryMaxTextController;
   String? Function(BuildContext, String?)? salaryMaxTextControllerValidator;
+  // State field(s) for conditionsField widget.
+  FocusNode? conditionsFieldFocusNode;
+  TextEditingController? conditionsFieldTextController;
+  String? Function(BuildContext, String?)?
+      conditionsFieldTextControllerValidator;
+  String? _conditionsFieldTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Поле обязательно';
+    }
+
+    return null;
+  }
+
   // State field(s) for LinkField widget.
   FocusNode? linkFieldFocusNode;
   TextEditingController? linkFieldTextController;
@@ -147,7 +161,7 @@ class VacancyCreateEditModel extends FlutterFlowModel<VacancyCreateEditWidget> {
   @override
   void initState(BuildContext context) {
     headerDesktopModel = createModel(context, () => HeaderDesktopModel());
-    headerMobileModel = createModel(context, () => HeaderMobileModel());
+    headerMobileOpenModel = createModel(context, () => HeaderMobileOpenModel());
     dolzhnostFieldTextControllerValidator =
         _dolzhnostFieldTextControllerValidator;
     aboutDolzhnostFieldTextControllerValidator =
@@ -155,6 +169,8 @@ class VacancyCreateEditModel extends FlutterFlowModel<VacancyCreateEditWidget> {
     trebovaniyaFieldTextControllerValidator =
         _trebovaniyaFieldTextControllerValidator;
     salaryMinTextControllerValidator = _salaryMinTextControllerValidator;
+    conditionsFieldTextControllerValidator =
+        _conditionsFieldTextControllerValidator;
     cityFieldTextControllerValidator = _cityFieldTextControllerValidator;
     footerModel = createModel(context, () => FooterModel());
   }
@@ -163,7 +179,7 @@ class VacancyCreateEditModel extends FlutterFlowModel<VacancyCreateEditWidget> {
   void dispose() {
     unfocusNode.dispose();
     headerDesktopModel.dispose();
-    headerMobileModel.dispose();
+    headerMobileOpenModel.dispose();
     dolzhnostFieldFocusNode?.dispose();
     dolzhnostFieldTextController?.dispose();
 
@@ -181,6 +197,9 @@ class VacancyCreateEditModel extends FlutterFlowModel<VacancyCreateEditWidget> {
 
     salaryMaxFocusNode?.dispose();
     salaryMaxTextController?.dispose();
+
+    conditionsFieldFocusNode?.dispose();
+    conditionsFieldTextController?.dispose();
 
     linkFieldFocusNode?.dispose();
     linkFieldTextController?.dispose();

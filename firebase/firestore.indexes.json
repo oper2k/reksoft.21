@@ -41,6 +41,20 @@
       ]
     },
     {
+      "collectionGroup": "vacancies",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "creator",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "is_Deleted",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "notifications",
       "queryScope": "COLLECTION",
       "fields": [
@@ -86,6 +100,20 @@
         },
         {
           "fieldPath": "isViewed",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vacancies",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_Deleted",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
           "order": "ASCENDING"
         }
       ]

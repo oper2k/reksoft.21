@@ -177,6 +177,8 @@ class _EducationItemWidgetState extends State<EducationItemWidget> {
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
                           FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
+                maxLines: 2,
+                minLines: 1,
                 cursorColor: FlutterFlowTheme.of(context).primaryText,
                 validator: _model.universityTextControllerValidator
                     .asValidator(context),
@@ -282,6 +284,8 @@ class _EducationItemWidgetState extends State<EducationItemWidget> {
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
                           FlutterFlowTheme.of(context).bodyMediumFamily),
                     ),
+                maxLines: 2,
+                minLines: 1,
                 cursorColor: FlutterFlowTheme.of(context).primaryText,
                 validator:
                     _model.facultyTextControllerValidator.asValidator(context),
@@ -315,8 +319,15 @@ class _EducationItemWidgetState extends State<EducationItemWidget> {
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
+                  child: Wrap(
+                    spacing: 0.0,
+                    runSpacing: 0.0,
+                    alignment: WrapAlignment.start,
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    direction: Axis.horizontal,
+                    runAlignment: WrapAlignment.start,
+                    verticalDirection: VerticalDirection.down,
+                    clipBehavior: Clip.none,
                     children: [
                       Container(
                         width: 140.0,

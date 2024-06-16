@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/footer/footer_widget.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
-import '/main/header_mobile/header_mobile_widget.dart';
+import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/news/news_components/upload_image/upload_image_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -141,9 +141,9 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                           ),
                         ),
                         wrapWithModel(
-                          model: _model.headerMobileModel,
+                          model: _model.headerMobileOpenModel,
                           updateCallback: () => setState(() {}),
-                          child: HeaderMobileWidget(
+                          child: HeaderMobileOpenWidget(
                             currentPage: 1,
                           ),
                         ),
@@ -328,157 +328,38 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 4.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .lightGray1,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(24.0),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    18.0,
-                                                                    16.0,
-                                                                    18.0,
-                                                                    16.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Icon(
-                                                              Icons.menu,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 24.0,
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Все новости',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      fontSize:
-                                                                          15.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 26.0, 0.0, 20.0),
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      widget.isEdit
+                                                          ? 'Редактировать новость'
+                                                          : 'Добавить новость',
+                                                      'Добавить новость',
                                                     ),
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(24.0),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    18.0,
-                                                                    16.0,
-                                                                    18.0,
-                                                                    16.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Icon(
-                                                              Icons.add,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .white,
-                                                              size: 24.0,
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Добавить новость',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .white,
-                                                                      fontSize:
-                                                                          15.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ].divide(
-                                                      SizedBox(width: 16.0)),
+                                                  ),
                                                 ),
-                                              ),
-                                              Divider(
-                                                thickness: 1.0,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
@@ -1580,113 +1461,104 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                                                     context),
                                                           ),
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      20.0,
-                                                                      13.0,
-                                                                      20.0,
-                                                                      13.0),
-                                                          child: Builder(
-                                                            builder: (context) {
-                                                              final skill =
-                                                                  _model
-                                                                      .hashtags
-                                                                      .toList();
-                                                              return Wrap(
-                                                                spacing: 10.0,
-                                                                runSpacing:
-                                                                    10.0,
-                                                                alignment:
-                                                                    WrapAlignment
-                                                                        .start,
-                                                                crossAxisAlignment:
-                                                                    WrapCrossAlignment
-                                                                        .start,
-                                                                direction: Axis
-                                                                    .horizontal,
-                                                                runAlignment:
-                                                                    WrapAlignment
-                                                                        .start,
-                                                                verticalDirection:
-                                                                    VerticalDirection
-                                                                        .down,
-                                                                clipBehavior:
-                                                                    Clip.none,
-                                                                children: List.generate(
-                                                                    skill
-                                                                        .length,
-                                                                    (skillIndex) {
-                                                                  final skillItem =
-                                                                      skill[
-                                                                          skillIndex];
-                                                                  return Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .lightGray1,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10.0),
-                                                                    ),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          18.0,
-                                                                          12.0,
-                                                                          18.0,
-                                                                          12.0),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.min,
-                                                                        children: [
-                                                                          InkWell(
-                                                                            splashColor:
-                                                                                Colors.transparent,
-                                                                            focusColor:
-                                                                                Colors.transparent,
-                                                                            hoverColor:
-                                                                                Colors.transparent,
-                                                                            highlightColor:
-                                                                                Colors.transparent,
-                                                                            onTap:
-                                                                                () async {
-                                                                              _model.removeAtIndexFromHashtags(skillIndex);
-                                                                              setState(() {});
-                                                                            },
-                                                                            child:
-                                                                                Icon(
-                                                                              Icons.close,
-                                                                              color: FlutterFlowTheme.of(context).gray,
-                                                                              size: 10.0,
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                8.0,
-                                                                                0.0,
-                                                                                0.0,
-                                                                                0.0),
-                                                                            child:
-                                                                                Text(
-                                                                              skillItem,
-                                                                              style: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        20.0,
+                                                                        13.0,
+                                                                        20.0,
+                                                                        13.0),
+                                                            child: Builder(
+                                                              builder:
+                                                                  (context) {
+                                                                final skill =
+                                                                    _model
+                                                                        .hashtags
+                                                                        .toList();
+                                                                return Wrap(
+                                                                  spacing: 10.0,
+                                                                  runSpacing:
+                                                                      10.0,
+                                                                  alignment:
+                                                                      WrapAlignment
+                                                                          .start,
+                                                                  crossAxisAlignment:
+                                                                      WrapCrossAlignment
+                                                                          .start,
+                                                                  direction: Axis
+                                                                      .horizontal,
+                                                                  runAlignment:
+                                                                      WrapAlignment
+                                                                          .start,
+                                                                  verticalDirection:
+                                                                      VerticalDirection
+                                                                          .down,
+                                                                  clipBehavior:
+                                                                      Clip.none,
+                                                                  children: List
+                                                                      .generate(
+                                                                          skill
+                                                                              .length,
+                                                                          (skillIndex) {
+                                                                    final skillItem =
+                                                                        skill[
+                                                                            skillIndex];
+                                                                    return Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .lightGray1,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10.0),
                                                                       ),
-                                                                    ),
-                                                                  );
-                                                                }),
-                                                              );
-                                                            },
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            18.0,
+                                                                            12.0,
+                                                                            18.0,
+                                                                            12.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.min,
+                                                                          children: [
+                                                                            InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                _model.removeAtIndexFromHashtags(skillIndex);
+                                                                                setState(() {});
+                                                                              },
+                                                                              child: Icon(
+                                                                                Icons.close,
+                                                                                color: FlutterFlowTheme.of(context).gray,
+                                                                                size: 10.0,
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                                                              child: Text(
+                                                                                skillItem,
+                                                                                style: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                      letterSpacing: 0.0,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }),
+                                                                );
+                                                              },
+                                                            ),
                                                           ),
                                                         ),
                                                       ],
@@ -1889,8 +1761,7 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                                                 .center,
                                                         children: [
                                                           Icon(
-                                                            Icons
-                                                                .insert_link_rounded,
+                                                            FFIcons.kattachment,
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .white,
@@ -1952,7 +1823,7 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                                         _model.image!,
                                                       ),
                                                       width: double.infinity,
-                                                      height: 222.0,
+                                                      height: 280.0,
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
@@ -2285,6 +2156,8 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                                                     publishDate:
                                                                         _model
                                                                             .datePicked,
+                                                                    creator:
+                                                                        currentUserReference,
                                                                   ),
                                                                   ...mapToFirestore(
                                                                     {
@@ -2297,8 +2170,10 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                                               }
                                                             } else {
                                                               showDialog(
-                                                                barrierColor: Colors
-                                                                    .transparent,
+                                                                barrierColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .modalBgnd,
                                                                 context:
                                                                     context,
                                                                 builder:
@@ -2345,8 +2220,10 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
 
                                                             context.safePop();
                                                             showDialog(
-                                                              barrierColor: Colors
-                                                                  .transparent,
+                                                              barrierColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .modalBgnd,
                                                               context: context,
                                                               builder:
                                                                   (dialogContext) {
@@ -2485,6 +2362,8 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/reksoft-21-46uzyi/assets/2fi7htzwi7vt/logo.png.png',
                                                                 publishDate:
                                                                     getCurrentTimestamp,
+                                                                creator:
+                                                                    currentUserReference,
                                                               ),
                                                               ...mapToFirestore(
                                                                 {
@@ -2495,8 +2374,10 @@ class _NewsCreateEditWidgetState extends State<NewsCreateEditWidget> {
                                                             });
                                                             context.safePop();
                                                             showDialog(
-                                                              barrierColor: Colors
-                                                                  .transparent,
+                                                              barrierColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .modalBgnd,
                                                               context: context,
                                                               builder:
                                                                   (dialogContext) {

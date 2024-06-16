@@ -88,7 +88,6 @@ dependencies:
   plugin_platform_interface: 2.1.8
   provider: 6.0.5
   rxdart: 0.27.7
-  share_plus: 7.2.1
   shared_preferences: 2.2.2
   shared_preferences_android: 2.2.1
   shared_preferences_foundation: 2.3.4
@@ -151,6 +150,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Gilroy-Light.otf
           weight: 300
+
+    - family: Icomoon
+      fonts:
+        - asset: assets/fonts/icomoon.ttf
 
   
   # An image asset can refer to one or more resolution-specific "variants", see

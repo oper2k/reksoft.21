@@ -87,7 +87,7 @@ class _SocialLinksMainWidgetState extends State<SocialLinksMainWidget> {
                           borderWidth: 1.0,
                           buttonSize: 40.0,
                           icon: Icon(
-                            Icons.delete_outline_rounded,
+                            FFIcons.kdelete,
                             color: FlutterFlowTheme.of(context).gray,
                             size: 24.0,
                           ),

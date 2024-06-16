@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/main/info_message/info_message_widget.dart';
-import '/vacancy/vacancy_components/vacancy_response/vacancy_response_widget.dart';
+import '/vacancy/vacancy_response/vacancy_response_widget.dart';
 import 'dart:async';
 import 'vacancy_response_btn_widget.dart' show VacancyResponseBtnWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';

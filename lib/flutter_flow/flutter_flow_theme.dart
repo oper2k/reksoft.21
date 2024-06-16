@@ -72,7 +72,8 @@ abstract class FlutterFlowTheme {
   late Color transpa;
   late Color transpaU;
   late Color darkBlueTw;
-  late Color customColor1;
+  late Color modalBgnd;
+  late Color blueNight;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -186,7 +187,8 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color transpa = Color(0x00FFFFFF);
   late Color transpaU = Color(0xFFFFFFFF);
   late Color darkBlueTw = Color(0xFF1E1E2F);
-  late Color customColor1 = Color(0x4C1E1E2F);
+  late Color modalBgnd = Color(0x4C1E1E2F);
+  late Color blueNight = Color(0xFF3378FF);
 }
 
 abstract class Typography {
@@ -592,7 +594,8 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color transpa = Color(0x0014181B);
   late Color transpaU = Color(0xFF14181B);
   late Color darkBlueTw = Color(0xFF1E1E2F);
-  late Color customColor1 = Color(0x4CFFFFFF);
+  late Color modalBgnd = Color(0x4CFFFFFF);
+  late Color blueNight = Color(0xFFFFFFFF);
 }
 
 extension TextStyleHelper on TextStyle {

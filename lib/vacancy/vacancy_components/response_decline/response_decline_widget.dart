@@ -1,9 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/main/info_message/info_message_widget.dart';
+import 'dart:async';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +122,7 @@ class _ResponseDeclineWidgetState extends State<ResponseDeclineWidget>
                         Navigator.pop(context);
                       },
                       child: Icon(
-                        Icons.close,
+                        FFIcons.kclose,
                         color: FlutterFlowTheme.of(context).gray,
                         size: 24.0,
                       ),
@@ -201,10 +203,22 @@ class _ResponseDeclineWidgetState extends State<ResponseDeclineWidget>
                                 },
                               ),
                             });
+                            unawaited(
+                              () async {
+                                _model.apiResultnma =
+                                    await SendEmailGroup.sendEmailCall.call(
+                                  email: widget.user?.email,
+                                  name:
+                                      '${widget.user?.displayName} ${widget.user?.displayName}',
+                                  text:
+                                      'Здравствуйте. К сожалению мы не готовы пригласить вас на должность ${widget.vacancy?.jobTitle}',
+                                );
+                              }(),
+                            );
                             Navigator.pop(context);
                             showDialog(
                               barrierColor:
-                                  FlutterFlowTheme.of(context).customColor1,
+                                  FlutterFlowTheme.of(context).modalBgnd,
                               context: context,
                               builder: (dialogContext) {
                                 return Dialog(
@@ -220,6 +234,8 @@ class _ResponseDeclineWidgetState extends State<ResponseDeclineWidget>
                                 );
                               },
                             ).then((value) => setState(() {}));
+
+                            setState(() {});
                           },
                           child: Container(
                             height: 50.0,

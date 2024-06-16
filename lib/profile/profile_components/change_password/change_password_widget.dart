@@ -105,7 +105,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget>
                         Navigator.pop(context);
                       },
                       child: Icon(
-                        Icons.close,
+                        FFIcons.kclose,
                         color: FlutterFlowTheme.of(context).gray,
                         size: 24.0,
                       ),
@@ -219,7 +219,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget>
                             Navigator.pop(context);
                             showDialog(
                               barrierColor:
-                                  FlutterFlowTheme.of(context).customColor1,
+                                  FlutterFlowTheme.of(context).modalBgnd,
                               context: context,
                               builder: (dialogContext) {
                                 return Dialog(
