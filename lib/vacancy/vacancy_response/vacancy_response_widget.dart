@@ -627,6 +627,7 @@ class _VacancyResponseWidgetState extends State<VacancyResponseWidget>
                           socialLink: _model.socialTextController.text,
                           createdTime: getCurrentTimestamp,
                           isChatFinished: false,
+                          isInterviewDateSelected: false,
                         ));
                         _model.response = ResponseRecord.getDocumentFromData(
                             createResponseRecordData(
@@ -640,6 +641,7 @@ class _VacancyResponseWidgetState extends State<VacancyResponseWidget>
                               socialLink: _model.socialTextController.text,
                               createdTime: getCurrentTimestamp,
                               isChatFinished: false,
+                              isInterviewDateSelected: false,
                             ),
                             responseRecordReference);
 

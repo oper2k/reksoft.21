@@ -13,6 +13,7 @@ import '/main/header_desktop/header_desktop_widget.dart';
 import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
 import '/placeholders/empty_responses_list/empty_responses_list_widget.dart';
+import '/vacancy/vacancy_components/accept_applicant/accept_applicant_widget.dart';
 import '/vacancy/vacancy_components/response_accept/response_accept_widget.dart';
 import '/vacancy/vacancy_components/response_decline/response_decline_widget.dart';
 import '/vacancy/vacancy_components/resume_a_iresults/resume_a_iresults_widget.dart';
@@ -21,6 +22,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'h_r_candidates_widget.dart' show HRCandidatesWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -46,6 +48,12 @@ class HRCandidatesModel extends FlutterFlowModel<HRCandidatesWidget> {
   // State field(s) for vacancyFilter widget.
   String? vacancyFilterValue;
   FormFieldController<String>? vacancyFilterValueController;
+  // Stores action output result for [Firestore Query - Query a collection] action in message widget.
+  int? isChatExist;
+  // Stores action output result for [Firestore Query - Query a collection] action in message widget.
+  ChatsRecord? chatDoc;
+  // Stores action output result for [Backend Call - Create Document] action in message widget.
+  ChatsRecord? createdChat;
   // Stores action output result for [Backend Call - API (Send email)] action in Button widget.
   ApiCallResponse? apiResultnma;
   // Model for Footer component.

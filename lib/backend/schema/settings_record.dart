@@ -41,12 +41,30 @@ class SettingsRecord extends FirestoreRecord {
   List<int> get salaryList => _salaryList ?? const [];
   bool hasSalaryList() => _salaryList != null;
 
+  // "morningTimes" field.
+  List<String>? _morningTimes;
+  List<String> get morningTimes => _morningTimes ?? const [];
+  bool hasMorningTimes() => _morningTimes != null;
+
+  // "dayTimes" field.
+  List<String>? _dayTimes;
+  List<String> get dayTimes => _dayTimes ?? const [];
+  bool hasDayTimes() => _dayTimes != null;
+
+  // "eveningTimes" field.
+  List<String>? _eveningTimes;
+  List<String> get eveningTimes => _eveningTimes ?? const [];
+  bool hasEveningTimes() => _eveningTimes != null;
+
   void _initializeFields() {
     _newsCategories = getDataList(snapshotData['news_categories']);
     _specializationsList = getDataList(snapshotData['specializationsList']);
     _employmentTypeList = getDataList(snapshotData['employmentTypeList']);
     _workFormatList = getDataList(snapshotData['workFormatList']);
     _salaryList = getDataList(snapshotData['salaryList']);
+    _morningTimes = getDataList(snapshotData['morningTimes']);
+    _dayTimes = getDataList(snapshotData['dayTimes']);
+    _eveningTimes = getDataList(snapshotData['eveningTimes']);
   }
 
   static CollectionReference get collection =>
@@ -101,7 +119,10 @@ class SettingsRecordDocumentEquality implements Equality<SettingsRecord> {
         listEquality.equals(e1?.specializationsList, e2?.specializationsList) &&
         listEquality.equals(e1?.employmentTypeList, e2?.employmentTypeList) &&
         listEquality.equals(e1?.workFormatList, e2?.workFormatList) &&
-        listEquality.equals(e1?.salaryList, e2?.salaryList);
+        listEquality.equals(e1?.salaryList, e2?.salaryList) &&
+        listEquality.equals(e1?.morningTimes, e2?.morningTimes) &&
+        listEquality.equals(e1?.dayTimes, e2?.dayTimes) &&
+        listEquality.equals(e1?.eveningTimes, e2?.eveningTimes);
   }
 
   @override
@@ -110,7 +131,10 @@ class SettingsRecordDocumentEquality implements Equality<SettingsRecord> {
         e?.specializationsList,
         e?.employmentTypeList,
         e?.workFormatList,
-        e?.salaryList
+        e?.salaryList,
+        e?.morningTimes,
+        e?.dayTimes,
+        e?.eveningTimes
       ]);
 
   @override

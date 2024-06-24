@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/placeholders/notify_chat_placeholder/notify_chat_placeholder_widget.dart';
 import '/placeholders/notify_icon_placeholder/notify_icon_placeholder_widget.dart';
 import '/profile/profile_components/upload_resume/upload_resume_widget.dart';
 import 'header_desktop_widget.dart' show HeaderDesktopWidget;
@@ -23,6 +24,10 @@ class HeaderDesktopModel extends FlutterFlowModel<HeaderDesktopWidget> {
   bool mouseRegionHovered4 = false;
   // State field(s) for MouseRegion widget.
   bool mouseRegionHovered5 = false;
+  // State field(s) for Chat widget.
+  bool chatHovered = false;
+  // Model for notifyChatPlaceholder component.
+  late NotifyChatPlaceholderModel notifyChatPlaceholderModel;
   // State field(s) for MouseRegion widget.
   bool mouseRegionHovered6 = false;
   // Model for notifyIconPlaceholder component.
@@ -32,12 +37,15 @@ class HeaderDesktopModel extends FlutterFlowModel<HeaderDesktopWidget> {
 
   @override
   void initState(BuildContext context) {
+    notifyChatPlaceholderModel =
+        createModel(context, () => NotifyChatPlaceholderModel());
     notifyIconPlaceholderModel =
         createModel(context, () => NotifyIconPlaceholderModel());
   }
 
   @override
   void dispose() {
+    notifyChatPlaceholderModel.dispose();
     notifyIconPlaceholderModel.dispose();
   }
 }

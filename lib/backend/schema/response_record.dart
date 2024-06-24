@@ -71,6 +71,16 @@ class ResponseRecord extends FirestoreRecord {
   DateTime? get interviewDate => _interviewDate;
   bool hasInterviewDate() => _interviewDate != null;
 
+  // "isInterviewDateSelected" field.
+  bool? _isInterviewDateSelected;
+  bool get isInterviewDateSelected => _isInterviewDateSelected ?? false;
+  bool hasIsInterviewDateSelected() => _isInterviewDateSelected != null;
+
+  // "interviewContact" field.
+  String? _interviewContact;
+  String get interviewContact => _interviewContact ?? '';
+  bool hasInterviewContact() => _interviewContact != null;
+
   void _initializeFields() {
     _applicant = snapshotData['applicant'] as DocumentReference?;
     _hr = snapshotData['hr'] as DocumentReference?;
@@ -83,6 +93,8 @@ class ResponseRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _chatSummary = snapshotData['chat_summary'] as String?;
     _interviewDate = snapshotData['interview_date'] as DateTime?;
+    _isInterviewDateSelected = snapshotData['isInterviewDateSelected'] as bool?;
+    _interviewContact = snapshotData['interviewContact'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -131,6 +143,8 @@ Map<String, dynamic> createResponseRecordData({
   DateTime? createdTime,
   String? chatSummary,
   DateTime? interviewDate,
+  bool? isInterviewDateSelected,
+  String? interviewContact,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -145,6 +159,8 @@ Map<String, dynamic> createResponseRecordData({
       'created_time': createdTime,
       'chat_summary': chatSummary,
       'interview_date': interviewDate,
+      'isInterviewDateSelected': isInterviewDateSelected,
+      'interviewContact': interviewContact,
     }.withoutNulls,
   );
 
@@ -166,7 +182,9 @@ class ResponseRecordDocumentEquality implements Equality<ResponseRecord> {
         e1?.isChatFinished == e2?.isChatFinished &&
         e1?.createdTime == e2?.createdTime &&
         e1?.chatSummary == e2?.chatSummary &&
-        e1?.interviewDate == e2?.interviewDate;
+        e1?.interviewDate == e2?.interviewDate &&
+        e1?.isInterviewDateSelected == e2?.isInterviewDateSelected &&
+        e1?.interviewContact == e2?.interviewContact;
   }
 
   @override
@@ -181,7 +199,9 @@ class ResponseRecordDocumentEquality implements Equality<ResponseRecord> {
         e?.isChatFinished,
         e?.createdTime,
         e?.chatSummary,
-        e?.interviewDate
+        e?.interviewDate,
+        e?.isInterviewDateSelected,
+        e?.interviewContact
       ]);
 
   @override

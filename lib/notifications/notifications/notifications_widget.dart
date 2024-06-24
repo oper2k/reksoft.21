@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/applicant_calendar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -406,7 +407,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                                       Text(
                                                                                         () {
                                                                                           if (notifyItem.type == 'Приглашение') {
-                                                                                            return 'Приглашение';
+                                                                                            return 'Приглашение на интерьвю';
                                                                                           } else if (notifyItem.type == 'Приглашение на вводное интервью') {
                                                                                             return 'Приглашение на вводное интервью';
                                                                                           } else if (notifyItem.type == 'Отказ') {
@@ -420,16 +421,18 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                               color: () {
-                                                                                                if (notifyItem.type == 'Приглашение') {
-                                                                                                  return FlutterFlowTheme.of(context).success;
+                                                                                                if (notifyItem.type == 'Приглашение на работу') {
+                                                                                                  return FlutterFlowTheme.of(context).secondary;
                                                                                                 } else if (notifyItem.type == 'Приглашение на вводное интервью') {
                                                                                                   return FlutterFlowTheme.of(context).primary;
                                                                                                 } else if (notifyItem.type == 'Отказ') {
                                                                                                   return FlutterFlowTheme.of(context).error;
                                                                                                 } else if (notifyItem.type == 'Отклик') {
                                                                                                   return FlutterFlowTheme.of(context).primary;
+                                                                                                } else if (notifyItem.type == 'Приглашение') {
+                                                                                                  return FlutterFlowTheme.of(context).primary;
                                                                                                 } else {
-                                                                                                  return FlutterFlowTheme.of(context).primaryText;
+                                                                                                  return FlutterFlowTheme.of(context).primary;
                                                                                                 }
                                                                                               }(),
                                                                                               fontSize: 15.0,
@@ -708,18 +711,25 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                context.pushNamed(
-                                                  'userFullInfo',
-                                                  queryParameters: {
-                                                    'candidat': serializeParam(
-                                                      _model.sender,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'candidat': _model.sender,
-                                                  },
-                                                );
+                                                if (valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.role,
+                                                        '') ==
+                                                    'hr') {
+                                                  context.pushNamed(
+                                                    'userFullInfo',
+                                                    queryParameters: {
+                                                      'candidat':
+                                                          serializeParam(
+                                                        _model.sender,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'candidat': _model.sender,
+                                                    },
+                                                  );
+                                                }
                                               },
                                               child: Container(
                                                 width: 40.0,
@@ -814,7 +824,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                             if (_model.currentNotification
                                                     ?.type ==
                                                 'Приглашение') {
-                                              return 'Приглашение на работу';
+                                              return 'Приглашение на интервью';
                                             } else if (_model
                                                     .currentNotification
                                                     ?.type ==
@@ -831,7 +841,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                 'Отклик') {
                                               return 'Отклик на вакансию';
                                             } else {
-                                              return 'Уведомление от компании';
+                                              return 'Уведомление';
                                             }
                                           }(),
                                           style: FlutterFlowTheme.of(context)
@@ -843,10 +853,10 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                 color: () {
                                                   if (_model.currentNotification
                                                           ?.type ==
-                                                      'Приглашение') {
+                                                      'Приглашение на работу') {
                                                     return FlutterFlowTheme.of(
                                                             context)
-                                                        .success;
+                                                        .secondary;
                                                   } else if (_model
                                                           .currentNotification
                                                           ?.type ==
@@ -868,10 +878,17 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                     return FlutterFlowTheme.of(
                                                             context)
                                                         .primary;
+                                                  } else if (_model
+                                                          .currentNotification
+                                                          ?.type ==
+                                                      'Приглашение') {
+                                                    return FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary;
                                                   } else {
                                                     return FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryText;
+                                                        .primary;
                                                   }
                                                 }(),
                                                 fontSize: 15.0,
@@ -1104,6 +1121,194 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                             );
                                           },
                                         ),
+                                      ),
+                                      StreamBuilder<ResponseRecord>(
+                                        stream: ResponseRecord.getDocument(
+                                            _model.currentNotification!
+                                                .response!),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 20.0,
+                                                height: 20.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    Colors.transparent,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          final interviewResponseRecord =
+                                              snapshot.data!;
+                                          return Container(
+                                            decoration: BoxDecoration(),
+                                            child: Visibility(
+                                              visible:
+                                                  (interviewResponseRecord
+                                                              .status ==
+                                                          'Приглашение') &&
+                                                      (valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.role,
+                                                              '') !=
+                                                          'hr') &&
+                                                      (interviewResponseRecord
+                                                              .isInterviewDateSelected !=
+                                                          true),
+                                              child: Builder(
+                                                builder: (context) => Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: AuthUserStreamWidget(
+                                                    builder: (context) =>
+                                                        FFButtonWidget(
+                                                      onPressed: () async {
+                                                        _model.hr = await UsersRecord
+                                                            .getDocumentOnce(
+                                                                interviewResponseRecord
+                                                                    .hr!);
+                                                        await showDialog(
+                                                          barrierColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .modalBgnd,
+                                                          context: context,
+                                                          builder:
+                                                              (dialogContext) {
+                                                            return Dialog(
+                                                              elevation: 0,
+                                                              insetPadding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              alignment: AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
+                                                                            context)
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
+                                                                            context)
+                                                                        .unfocus(),
+                                                                child:
+                                                                    ApplicantCalendarWidget(
+                                                                  startDate: _model
+                                                                      .hr!
+                                                                      .availableDateStart!,
+                                                                  endDate: _model
+                                                                      .hr!
+                                                                      .availableDateEnd!,
+                                                                  morning: _model
+                                                                      .hr!
+                                                                      .availableMorningHours,
+                                                                  day: _model
+                                                                      .hr!
+                                                                      .availableDayHours,
+                                                                  evening: _model
+                                                                      .hr!
+                                                                      .availableEveningHours,
+                                                                  weekends: _model
+                                                                      .hr!
+                                                                      .weekends,
+                                                                  lockedDates:
+                                                                      _model.hr
+                                                                          ?.lockedDates,
+                                                                  hr: _model.hr!
+                                                                      .reference,
+                                                                  response:
+                                                                      interviewResponseRecord
+                                                                          .reference,
+                                                                  vacancy:
+                                                                      interviewResponseRecord
+                                                                          .vacancy,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            setState(() {}));
+
+                                                        setState(() {});
+                                                      },
+                                                      text: 'Выбрать дату',
+                                                      options: FFButtonOptions(
+                                                        width: 280.0,
+                                                        height: 50.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    24.0,
+                                                                    0.0,
+                                                                    24.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      15.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleSmallFamily),
+                                                                ),
+                                                        elevation: 0.0,
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 0.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                       if (valueOrDefault(
                                               currentUserDocument?.role, '') ==

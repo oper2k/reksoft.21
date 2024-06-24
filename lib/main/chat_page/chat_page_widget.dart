@@ -72,6 +72,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget>
             await OpenAIChatGPTGroup.sendFullPromptCall.call(
           promptJson: FFAppState().chatHistory,
         );
+
         if ((_model.chatGPTResponse23Copy?.succeeded ?? true)) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -660,6 +661,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget>
                                                 .call(
                                           promptJson: FFAppState().chatHistory,
                                         );
+
                                         if ((_model
                                                 .chatGPTResponse23?.succeeded ??
                                             true)) {

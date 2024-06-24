@@ -12,6 +12,8 @@ import '/vacancy/vacancy_components/resume_a_iresults/resume_a_iresults_widget.d
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'user_full_info_widget.dart' show UserFullInfoWidget;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +29,12 @@ class UserFullInfoModel extends FlutterFlowModel<UserFullInfoWidget> {
   late HeaderDesktopModel headerDesktopModel;
   // Model for HeaderMobileOpen component.
   late HeaderMobileOpenModel headerMobileOpenModel;
+  // Stores action output result for [Firestore Query - Query a collection] action in Container widget.
+  int? isChatExist;
+  // Stores action output result for [Firestore Query - Query a collection] action in Container widget.
+  ChatsRecord? chatDoc;
+  // Stores action output result for [Backend Call - Create Document] action in Container widget.
+  ChatsRecord? createdChat;
 
   @override
   void initState(BuildContext context) {

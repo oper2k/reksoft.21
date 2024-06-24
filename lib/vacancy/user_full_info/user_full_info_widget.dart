@@ -11,6 +11,8 @@ import '/placeholders/empty_profile_data_user/empty_profile_data_user_widget.dar
 import '/vacancy/vacancy_components/resume_a_iresults/resume_a_iresults_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -289,6 +291,246 @@ class _UserFullInfoWidgetState extends State<UserFullInfoWidget> {
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         children: [
+                                                          if (currentUserReference !=
+                                                              widget.candidat
+                                                                  ?.reference)
+                                                            Builder(
+                                                              builder:
+                                                                  (context) =>
+                                                                      Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            16.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    _model.isChatExist =
+                                                                        await queryChatsRecordCount(
+                                                                      queryBuilder: (chatsRecord) => chatsRecord
+                                                                          .where(
+                                                                            'user_b',
+                                                                            isEqualTo:
+                                                                                widget.candidat?.reference,
+                                                                          )
+                                                                          .where(
+                                                                            'user_a',
+                                                                            isEqualTo:
+                                                                                currentUserReference,
+                                                                          ),
+                                                                    );
+                                                                    if (_model
+                                                                            .isChatExist! >
+                                                                        0) {
+                                                                      _model.chatDoc =
+                                                                          await queryChatsRecordOnce(
+                                                                        queryBuilder: (chatsRecord) => chatsRecord
+                                                                            .where(
+                                                                              'user_b',
+                                                                              isEqualTo: widget.candidat?.reference,
+                                                                            )
+                                                                            .where(
+                                                                              'user_a',
+                                                                              isEqualTo: currentUserReference,
+                                                                            ),
+                                                                        singleRecord:
+                                                                            true,
+                                                                      ).then((s) =>
+                                                                              s.firstOrNull);
+
+                                                                      context
+                                                                          .pushNamed(
+                                                                        'chat_2_Details',
+                                                                        queryParameters:
+                                                                            {
+                                                                          'chatRef':
+                                                                              serializeParam(
+                                                                            _model.chatDoc,
+                                                                            ParamType.Document,
+                                                                          ),
+                                                                          'recipient':
+                                                                              serializeParam(
+                                                                            widget.candidat?.reference,
+                                                                            ParamType.DocumentReference,
+                                                                          ),
+                                                                        }.withoutNulls,
+                                                                        extra: <String,
+                                                                            dynamic>{
+                                                                          'chatRef':
+                                                                              _model.chatDoc,
+                                                                        },
+                                                                      );
+                                                                    } else {
+                                                                      var chatsRecordReference = ChatsRecord
+                                                                          .collection
+                                                                          .doc();
+                                                                      await chatsRecordReference
+                                                                          .set({
+                                                                        ...createChatsRecordData(
+                                                                          userA:
+                                                                              currentUserReference,
+                                                                          userB: widget
+                                                                              .candidat
+                                                                              ?.reference,
+                                                                          lastMessageTime:
+                                                                              getCurrentTimestamp,
+                                                                          lastMessageSentBy:
+                                                                              currentUserReference,
+                                                                          lastMessage:
+                                                                              'Рекрутер ${'${currentUserDisplayName} ${valueOrDefault(currentUserDocument?.surname, '')}'} начал(а) чат',
+                                                                        ),
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'users':
+                                                                                functions.returnUsersReferenceList(currentUserReference!, widget.candidat!.reference),
+                                                                            'last_message_seen_by':
+                                                                                [
+                                                                              currentUserReference
+                                                                            ],
+                                                                          },
+                                                                        ),
+                                                                      });
+                                                                      _model.createdChat =
+                                                                          ChatsRecord
+                                                                              .getDocumentFromData({
+                                                                        ...createChatsRecordData(
+                                                                          userA:
+                                                                              currentUserReference,
+                                                                          userB: widget
+                                                                              .candidat
+                                                                              ?.reference,
+                                                                          lastMessageTime:
+                                                                              getCurrentTimestamp,
+                                                                          lastMessageSentBy:
+                                                                              currentUserReference,
+                                                                          lastMessage:
+                                                                              'Рекрутер ${'${currentUserDisplayName} ${valueOrDefault(currentUserDocument?.surname, '')}'} начал(а) чат',
+                                                                        ),
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'users':
+                                                                                functions.returnUsersReferenceList(currentUserReference!, widget.candidat!.reference),
+                                                                            'last_message_seen_by':
+                                                                                [
+                                                                              currentUserReference
+                                                                            ],
+                                                                          },
+                                                                        ),
+                                                                      }, chatsRecordReference);
+
+                                                                      context
+                                                                          .pushNamed(
+                                                                        'chat_2_Details',
+                                                                        queryParameters:
+                                                                            {
+                                                                          'chatRef':
+                                                                              serializeParam(
+                                                                            _model.createdChat,
+                                                                            ParamType.Document,
+                                                                          ),
+                                                                          'recipient':
+                                                                              serializeParam(
+                                                                            widget.candidat?.reference,
+                                                                            ParamType.DocumentReference,
+                                                                          ),
+                                                                        }.withoutNulls,
+                                                                        extra: <String,
+                                                                            dynamic>{
+                                                                          'chatRef':
+                                                                              _model.createdChat,
+                                                                        },
+                                                                      );
+
+                                                                      showDialog(
+                                                                        barrierColor:
+                                                                            FlutterFlowTheme.of(context).modalBgnd,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (dialogContext) {
+                                                                          return Dialog(
+                                                                            elevation:
+                                                                                0,
+                                                                            insetPadding:
+                                                                                EdgeInsets.zero,
+                                                                            backgroundColor:
+                                                                                Colors.transparent,
+                                                                            alignment:
+                                                                                AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                            child:
+                                                                                GestureDetector(
+                                                                              onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                              child: InfoMessageWidget(
+                                                                                text: 'Вы создали чат с кандидатом',
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      ).then((value) =>
+                                                                          setState(
+                                                                              () {}));
+                                                                    }
+
+                                                                    setState(
+                                                                        () {});
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    width: double
+                                                                        .infinity,
+                                                                    height:
+                                                                        50.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Начать чат',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .headlineMedium
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                                                                              color: FlutterFlowTheme.of(context).white,
+                                                                              fontSize: 13.0,
+                                                                              letterSpacing: 0.0,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).headlineMediumFamily),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
                                                           Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
@@ -334,7 +576,7 @@ class _UserFullInfoWidgetState extends State<UserFullInfoWidget> {
                                                                     BoxDecoration(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
+                                                                      .warning,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(

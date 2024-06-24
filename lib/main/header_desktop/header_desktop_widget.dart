@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/placeholders/notify_chat_placeholder/notify_chat_placeholder_widget.dart';
 import '/placeholders/notify_icon_placeholder/notify_icon_placeholder_widget.dart';
 import '/profile/profile_components/upload_resume/upload_resume_widget.dart';
 import 'package:badges/badges.dart' as badges;
@@ -485,6 +486,95 @@ class _HeaderDesktopWidgetState extends State<HeaderDesktopWidget> {
                         setState(() => _model.mouseRegionHovered5 = false);
                       }),
                     ),
+                  MouseRegion(
+                    opaque: false,
+                    cursor: MouseCursor.defer ?? MouseCursor.defer,
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('chat_2_main');
+                        },
+                        child: Container(
+                          width: 42.0,
+                          height: 42.0,
+                          decoration: BoxDecoration(),
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: FutureBuilder<int>(
+                            future: queryChatMessagesRecordCount(
+                              queryBuilder: (chatMessagesRecord) =>
+                                  chatMessagesRecord
+                                      .where(
+                                        'recepient',
+                                        isEqualTo: currentUserReference,
+                                      )
+                                      .where(
+                                        'isViewed',
+                                        isNotEqualTo: true,
+                                      ),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return NotifyChatPlaceholderWidget();
+                              }
+                              int badgeCount = snapshot.data!;
+                              return badges.Badge(
+                                badgeContent: Text(
+                                  valueOrDefault<String>(
+                                    badgeCount.toString(),
+                                    '0',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
+                                      ),
+                                ),
+                                showBadge: badgeCount > 0,
+                                shape: badges.BadgeShape.circle,
+                                badgeColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                elevation: 0.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    6.0, 6.0, 6.0, 6.0),
+                                position: badges.BadgePosition.topEnd(),
+                                animationType: badges.BadgeAnimationType.scale,
+                                toAnimate: true,
+                                child: wrapWithModel(
+                                  model: _model.notifyChatPlaceholderModel,
+                                  updateCallback: () => setState(() {}),
+                                  child: NotifyChatPlaceholderWidget(
+                                    isActive: widget.page == '7' ? true : false,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    onEnter: ((event) async {
+                      setState(() => _model.chatHovered = true);
+                    }),
+                    onExit: ((event) async {
+                      setState(() => _model.chatHovered = false);
+                    }),
+                  ),
                   MouseRegion(
                     opaque: false,
                     cursor: MouseCursor.defer ?? MouseCursor.defer,

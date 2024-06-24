@@ -2,6 +2,8 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/calendar_settings_widget.dart';
+import '/components/raspisanie_h_r_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,6 +12,7 @@ import '/flutter_flow/upload_data.dart';
 import '/main/header_desktop/header_desktop_widget.dart';
 import '/main/header_mobile_open/header_mobile_open_widget.dart';
 import '/main/info_message/info_message_widget.dart';
+import '/placeholders/empty_available_times/empty_available_times_widget.dart';
 import '/placeholders/empty_profile_data/empty_profile_data_widget.dart';
 import '/profile/profile_components/change_password/change_password_widget.dart';
 import '/profile/profile_components/delete_account/delete_account_widget.dart';
@@ -1148,6 +1151,180 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                               height: 14.0)),
                                                         );
                                                       },
+                                                    ),
+                                                  ),
+                                                if (((currentUserDocument
+                                                                ?.lockedDates
+                                                                ?.toList() ??
+                                                            [])
+                                                        .isNotEmpty) &&
+                                                    ((currentUserDocument
+                                                                    ?.lockedDates
+                                                                    ?.toList() ??
+                                                                [])
+                                                            .where((e) =>
+                                                                e.date! >
+                                                                getCurrentTimestamp)
+                                                            .toList()
+                                                            .length >
+                                                        0))
+                                                  AuthUserStreamWidget(
+                                                    builder: (context) =>
+                                                        Container(
+                                                      width: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(24.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    24.0,
+                                                                    32.0,
+                                                                    24.0,
+                                                                    32.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .warning,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10.0),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        18.0,
+                                                                        12.0,
+                                                                        18.0,
+                                                                        12.0),
+                                                                child: Text(
+                                                                  'Ближайшее интервью',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .info,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          20.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Text(
+                                                                '${dateTimeFormat(
+                                                                  'dd MMMM (EEEE)',
+                                                                  (currentUserDocument
+                                                                              ?.lockedDates
+                                                                              ?.toList() ??
+                                                                          [])
+                                                                      .where((e) =>
+                                                                          e.date! >
+                                                                          getCurrentTimestamp)
+                                                                      .toList()
+                                                                      .sortedList(
+                                                                          (e) =>
+                                                                              e.date!)
+                                                                      .first
+                                                                      .date,
+                                                                  locale: FFLocalizations.of(
+                                                                          context)
+                                                                      .languageCode,
+                                                                )} в ${(currentUserDocument?.lockedDates?.toList() ?? []).where((e) => e.date! > getCurrentTimestamp).toList().sortedList((e) => e.date!).first.hour}',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .headlineSmallFamily,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).headlineSmallFamily),
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          6.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Text(
+                                                                (currentUserDocument
+                                                                            ?.lockedDates
+                                                                            ?.toList() ??
+                                                                        [])
+                                                                    .where((e) =>
+                                                                        e.date! >
+                                                                        getCurrentTimestamp)
+                                                                    .toList()
+                                                                    .sortedList(
+                                                                        (e) => e
+                                                                            .date!)
+                                                                    .first
+                                                                    .name,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .headlineSmallFamily,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).headlineSmallFamily),
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 if (valueOrDefault(
@@ -2911,7 +3088,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
-                                                                          16.0,
+                                                                          12.0,
                                                                           0.0,
                                                                           0.0),
                                                                       child:
@@ -2991,7 +3168,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
-                                                                          16.0,
+                                                                          12.0,
                                                                           0.0,
                                                                           0.0),
                                                                       child:
@@ -3066,7 +3243,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
-                                                                          16.0,
+                                                                          12.0,
                                                                           0.0,
                                                                           0.0),
                                                                       child:
@@ -3141,6 +3318,366 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                             },
                                                                           ),
                                                                         ],
+                                                                      ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          42.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Доступные дни для интервью',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                              fontSize: 15.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.w600,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Divider(
+                                                                      height:
+                                                                          36.0,
+                                                                      thickness:
+                                                                          1.0,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .gray,
+                                                                    ),
+                                                                    Builder(
+                                                                      builder:
+                                                                          (context) {
+                                                                        final date = functions
+                                                                            .generateDates(
+                                                                                currentUserDocument?.availableDateStart,
+                                                                                currentUserDocument?.availableDateEnd,
+                                                                                (currentUserDocument?.weekends?.toList() ?? []).toList())
+                                                                            .toList();
+                                                                        if (date
+                                                                            .isEmpty) {
+                                                                          return EmptyAvailableTimesWidget();
+                                                                        }
+                                                                        return Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: List.generate(
+                                                                              date.length,
+                                                                              (dateIndex) {
+                                                                            final dateItem =
+                                                                                date[dateIndex];
+                                                                            return Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                                                                  child: Text(
+                                                                                    dateTimeFormat(
+                                                                                      'dd MMMM (EEEE)',
+                                                                                      dateItem,
+                                                                                      locale: FFLocalizations.of(context).languageCode,
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                          color: FlutterFlowTheme.of(context).primaryText,
+                                                                                          fontSize: 14.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.normal,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            );
+                                                                          }).divide(
+                                                                              SizedBox(height: 8.0)),
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Доступное время: ',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                              fontSize: 15.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.w600,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          final hour = functions
+                                                                              .generateHours((currentUserDocument?.availableMorningHours?.toList() ?? []).toList(), (currentUserDocument?.availableDayHours?.toList() ?? []).toList(), (currentUserDocument?.availableEveningHours?.toList() ?? []).toList())
+                                                                              .toList();
+                                                                          if (hour
+                                                                              .isEmpty) {
+                                                                            return EmptyAvailableTimesWidget();
+                                                                          }
+                                                                          return Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children:
+                                                                                List.generate(hour.length, (hourIndex) {
+                                                                              final hourItem = hour[hourIndex];
+                                                                              return Text(
+                                                                                valueOrDefault<String>(
+                                                                                  hourItem,
+                                                                                  '-_-',
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      fontSize: 14.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.normal,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                    ),
+                                                                              );
+                                                                            }).divide(SizedBox(height: 8.0)),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                    if (((currentUserDocument?.weekends?.toList() ??
+                                                                                [])
+                                                                            .isNotEmpty) ==
+                                                                        true)
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            12.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          'Выходные дни: ',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                fontSize: 15.0,
+                                                                                letterSpacing: 0.0,
+                                                                                fontWeight: FontWeight.w600,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    if ((currentUserDocument?.weekends?.toList() ??
+                                                                            [])
+                                                                        .isNotEmpty)
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            12.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Builder(
+                                                                          builder:
+                                                                              (context) {
+                                                                            final day =
+                                                                                (currentUserDocument?.weekends?.toList() ?? []).toList();
+                                                                            return Column(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: List.generate(day.length, (dayIndex) {
+                                                                                final dayItem = day[dayIndex];
+                                                                                return Text(
+                                                                                  valueOrDefault<String>(
+                                                                                    dayItem,
+                                                                                    '-_-',
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                        fontSize: 14.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FontWeight.normal,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                      ),
+                                                                                );
+                                                                              }).divide(SizedBox(height: 8.0)),
+                                                                            );
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          20.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children:
+                                                                            [
+                                                                          Builder(
+                                                                            builder: (context) =>
+                                                                                FutureBuilder<List<SettingsRecord>>(
+                                                                              future: querySettingsRecordOnce(
+                                                                                singleRecord: true,
+                                                                              ),
+                                                                              builder: (context, snapshot) {
+                                                                                // Customize what your widget looks like when it's loading.
+                                                                                if (!snapshot.hasData) {
+                                                                                  return Center(
+                                                                                    child: SizedBox(
+                                                                                      width: 15.0,
+                                                                                      height: 15.0,
+                                                                                      child: CircularProgressIndicator(
+                                                                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                          FlutterFlowTheme.of(context).primary,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  );
+                                                                                }
+                                                                                List<SettingsRecord> buttonSettingsRecordList = snapshot.data!;
+                                                                                final buttonSettingsRecord = buttonSettingsRecordList.isNotEmpty ? buttonSettingsRecordList.first : null;
+                                                                                return FFButtonWidget(
+                                                                                  onPressed: () async {
+                                                                                    await showDialog(
+                                                                                      barrierColor: FlutterFlowTheme.of(context).modalBgnd,
+                                                                                      context: context,
+                                                                                      builder: (dialogContext) {
+                                                                                        return Dialog(
+                                                                                          elevation: 0,
+                                                                                          insetPadding: EdgeInsets.zero,
+                                                                                          backgroundColor: Colors.transparent,
+                                                                                          alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                          child: GestureDetector(
+                                                                                            onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                            child: CalendarSettingsWidget(
+                                                                                              settings: buttonSettingsRecord!,
+                                                                                            ),
+                                                                                          ),
+                                                                                        );
+                                                                                      },
+                                                                                    ).then((value) => setState(() {}));
+                                                                                  },
+                                                                                  text: 'Выбрать даты',
+                                                                                  options: FFButtonOptions(
+                                                                                    width: 160.0,
+                                                                                    height: 38.0,
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                    color: FlutterFlowTheme.of(context).primary,
+                                                                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                          color: Colors.white,
+                                                                                          fontSize: 15.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                        ),
+                                                                                    elevation: 0.0,
+                                                                                    borderSide: BorderSide(
+                                                                                      color: Colors.transparent,
+                                                                                      width: 0.0,
+                                                                                    ),
+                                                                                    borderRadius: BorderRadius.circular(28.0),
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            ),
+                                                                          ),
+                                                                          if ((currentUserDocument?.lockedDates?.toList() ?? [])
+                                                                              .isNotEmpty)
+                                                                            Builder(
+                                                                              builder: (context) => FutureBuilder<List<SettingsRecord>>(
+                                                                                future: querySettingsRecordOnce(
+                                                                                  singleRecord: true,
+                                                                                ),
+                                                                                builder: (context, snapshot) {
+                                                                                  // Customize what your widget looks like when it's loading.
+                                                                                  if (!snapshot.hasData) {
+                                                                                    return Center(
+                                                                                      child: SizedBox(
+                                                                                        width: 15.0,
+                                                                                        height: 15.0,
+                                                                                        child: CircularProgressIndicator(
+                                                                                          valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                            FlutterFlowTheme.of(context).primary,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  }
+                                                                                  List<SettingsRecord> buttonSettingsRecordList = snapshot.data!;
+                                                                                  final buttonSettingsRecord = buttonSettingsRecordList.isNotEmpty ? buttonSettingsRecordList.first : null;
+                                                                                  return FFButtonWidget(
+                                                                                    onPressed: () async {
+                                                                                      await showDialog(
+                                                                                        barrierColor: FlutterFlowTheme.of(context).modalBgnd,
+                                                                                        context: context,
+                                                                                        builder: (dialogContext) {
+                                                                                          return Dialog(
+                                                                                            elevation: 0,
+                                                                                            insetPadding: EdgeInsets.zero,
+                                                                                            backgroundColor: Colors.transparent,
+                                                                                            alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                            child: GestureDetector(
+                                                                                              onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                              child: RaspisanieHRWidget(),
+                                                                                            ),
+                                                                                          );
+                                                                                        },
+                                                                                      ).then((value) => setState(() {}));
+                                                                                    },
+                                                                                    text: 'Расписание',
+                                                                                    icon: Icon(
+                                                                                      FFIcons.kdate,
+                                                                                      size: 20.0,
+                                                                                    ),
+                                                                                    options: FFButtonOptions(
+                                                                                      width: 160.0,
+                                                                                      height: 38.0,
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                                      iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                      color: FlutterFlowTheme.of(context).tertiary,
+                                                                                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                            color: Colors.white,
+                                                                                            fontSize: 15.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            fontWeight: FontWeight.w600,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                          ),
+                                                                                      elevation: 0.0,
+                                                                                      borderSide: BorderSide(
+                                                                                        color: Colors.transparent,
+                                                                                        width: 0.0,
+                                                                                      ),
+                                                                                      borderRadius: BorderRadius.circular(28.0),
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                        ].divide(SizedBox(width: 14.0)),
                                                                       ),
                                                                     ),
                                                                   ],
@@ -3463,13 +4000,46 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                           Stack(
                                                         children: [
                                                           Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        24.0,
-                                                                        32.0,
-                                                                        24.0,
-                                                                        32.0),
+                                                            padding: EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                      () {
+                                                                        if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointSmall) {
+                                                                          return 20.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointMedium) {
+                                                                          return 40.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointLarge) {
+                                                                          return 40.0;
+                                                                        } else {
+                                                                          return 40.0;
+                                                                        }
+                                                                      }(),
+                                                                      40.0,
+                                                                    ),
+                                                                    32.0,
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                      () {
+                                                                        if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointSmall) {
+                                                                          return 20.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointMedium) {
+                                                                          return 40.0;
+                                                                        } else if (MediaQuery.sizeOf(context).width <
+                                                                            kBreakpointLarge) {
+                                                                          return 40.0;
+                                                                        } else {
+                                                                          return 40.0;
+                                                                        }
+                                                                      }(),
+                                                                      40.0,
+                                                                    ),
+                                                                    32.0),
                                                             child: Column(
                                                               mainAxisSize:
                                                                   MainAxisSize

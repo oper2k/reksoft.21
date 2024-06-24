@@ -206,7 +206,7 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
                                   to: widget.user?.reference,
                                   type: 'Приглашение',
                                   text:
-                                      'Здравствуйте. Мы рассмотрели ваше резюме на должность \"${widget.vacancy?.jobTitle}\", и приняли решение пригласить вас на работу',
+                                      'Здравствуйте. Мы рассмотрели ваше резюме на должность \"${widget.vacancy?.jobTitle}\", и приняли решение пригласить вас на видео-интервью с рекрутёром. Выберите удобную дату для интервью',
                                   isViewed: false,
                                   response: widget.response?.reference,
                                   vacancy: widget.vacancy?.reference,
@@ -226,7 +226,7 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
                                     name:
                                         '${currentUserDisplayName} ${valueOrDefault(currentUserDocument?.surname, '')}',
                                     text:
-                                        'Здравствуйте. Приглашаем вас на работу на должность ${widget.vacancy?.jobTitle}',
+                                        'Здравствуйте. Приглашаем вас на видео-интерьвю на должность ${widget.vacancy?.jobTitle}',
                                   );
                                 }(),
                               );
@@ -251,7 +251,7 @@ class _ResponseAcceptWidgetState extends State<ResponseAcceptWidget>
 
                               setState(() {});
                             },
-                            text: 'Пригласить на работу',
+                            text: 'Пригласить на видео-интервью',
                             options: FFButtonOptions(
                               width: 184.0,
                               height: 50.0,

@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/applicant_calendar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -42,6 +43,8 @@ class NotificationsModel extends FlutterFlowModel<NotificationsWidget> {
   late HeaderMobileOpenModel headerMobileOpenModel;
   // Stores action output result for [Backend Call - Read Document] action in Button widget.
   VacanciesRecord? vacancy;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  UsersRecord? hr;
   // Stores action output result for [Backend Call - Read Document] action in Button widget.
   VacanciesRecord? vacancyItem;
   // Model for Footer component.

@@ -33,3 +33,6 @@ export '/vacancy/vacancy_list_hr/vacancy_list_hr_widget.dart'
 export '/vacancy/my_responses/my_responses_widget.dart' show MyResponsesWidget;
 export '/vacancy/user_full_info/user_full_info_widget.dart'
     show UserFullInfoWidget;
+export '/chat/chat_2_details/chat2_details_widget.dart' show Chat2DetailsWidget;
+export '/chat/chat_2_main/chat2_main_widget.dart' show Chat2MainWidget;
+export '/chat/image_details/image_details_widget.dart' show ImageDetailsWidget;

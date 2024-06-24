@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/applicant_calendar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,6 +12,7 @@ import '/main/info_message/info_message_widget.dart';
 import '/placeholders/empty_responses_list/empty_responses_list_widget.dart';
 import 'dart:math';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -133,6 +135,18 @@ class _MyResponsesWidgetState extends State<MyResponsesWidget>
         ],
       ),
       'containerOnPageLoadAnimation6': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          ScaleEffect(
+            curve: Curves.elasticOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(1.0, 1.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation7': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: null,
       ),
@@ -811,6 +825,131 @@ class _MyResponsesWidgetState extends State<MyResponsesWidget>
                                                                         0.0,
                                                                         0.0),
                                                             child: Text(
+                                                              'Приглашение на интервью',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 10.0,
+                                                                0.0, 0.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        _model.responseFilter =
+                                                            'Приглашение на работу';
+                                                        setState(() {});
+                                                      },
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Stack(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0),
+                                                                children: [
+                                                                  Container(
+                                                                    width: 24.0,
+                                                                    height:
+                                                                        24.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .info,
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          blurRadius:
+                                                                              10.0,
+                                                                          color:
+                                                                              Color(0x0826334D),
+                                                                          offset:
+                                                                              Offset(
+                                                                            0.0,
+                                                                            2.0,
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .lightGray1,
+                                                                        width:
+                                                                            2.0,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  if (_model
+                                                                          .responseFilter ==
+                                                                      'Приглашение на работу')
+                                                                    Container(
+                                                                      width:
+                                                                          14.0,
+                                                                      height:
+                                                                          14.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                      ),
+                                                                    ).animateOnPageLoad(
+                                                                        animationsMap[
+                                                                            'containerOnPageLoadAnimation5']!),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Text(
                                                               'Приглашение на работу',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -922,7 +1061,7 @@ class _MyResponsesWidgetState extends State<MyResponsesWidget>
                                                                       ),
                                                                     ).animateOnPageLoad(
                                                                         animationsMap[
-                                                                            'containerOnPageLoadAnimation5']!),
+                                                                            'containerOnPageLoadAnimation6']!),
                                                                 ],
                                                               ),
                                                             ],
@@ -1237,7 +1376,7 @@ class _MyResponsesWidgetState extends State<MyResponsesWidget>
                                                                                     height: 50.0,
                                                                                     decoration: BoxDecoration(
                                                                                       color: () {
-                                                                                        if (responseItem.status == 'Приглашение') {
+                                                                                        if (responseItem.status == 'Приглашение на работу') {
                                                                                           return FlutterFlowTheme.of(context).secondary;
                                                                                         } else if (responseItem.status == 'Отказ') {
                                                                                           return FlutterFlowTheme.of(context).error;
@@ -1251,7 +1390,15 @@ class _MyResponsesWidgetState extends State<MyResponsesWidget>
                                                                                     child: Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                                                                                       child: Text(
-                                                                                        responseItem.status == 'Прошел вводное интервью' ? 'Ожидание результатов' : responseItem.status,
+                                                                                        () {
+                                                                                          if (responseItem.status == 'Прошел вводное интервью') {
+                                                                                            return 'Ожидание результатов';
+                                                                                          } else if (responseItem.status == 'Приглашение') {
+                                                                                            return 'Приглашение на интервью';
+                                                                                          } else {
+                                                                                            return responseItem.status;
+                                                                                          }
+                                                                                        }(),
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                               color: FlutterFlowTheme.of(context).white,
@@ -1392,53 +1539,126 @@ class _MyResponsesWidgetState extends State<MyResponsesWidget>
                                                                                           ),
                                                                                     ),
                                                                                   ),
-                                                                                if ((responseItem.status == 'Приглашение на вводное интервью') && !responseItem.isChatFinished && !vacancyVacanciesRecord.isDeleted)
-                                                                                  Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                                                                                    child: FFButtonWidget(
-                                                                                      onPressed: () async {
-                                                                                        context.pushNamed(
-                                                                                          'Chat_Page',
-                                                                                          queryParameters: {
-                                                                                            'vacancy': serializeParam(
-                                                                                              vacancyVacanciesRecord,
-                                                                                              ParamType.Document,
-                                                                                            ),
-                                                                                            'response': serializeParam(
-                                                                                              responseItem,
-                                                                                              ParamType.Document,
-                                                                                            ),
-                                                                                          }.withoutNulls,
-                                                                                          extra: <String, dynamic>{
-                                                                                            'vacancy': vacancyVacanciesRecord,
-                                                                                            'response': responseItem,
+                                                                                Column(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    if ((responseItem.status == 'Приглашение на вводное интервью') && !responseItem.isChatFinished && !vacancyVacanciesRecord.isDeleted)
+                                                                                      Padding(
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                                                                                        child: FFButtonWidget(
+                                                                                          onPressed: () async {
+                                                                                            context.pushNamed(
+                                                                                              'Chat_Page',
+                                                                                              queryParameters: {
+                                                                                                'vacancy': serializeParam(
+                                                                                                  vacancyVacanciesRecord,
+                                                                                                  ParamType.Document,
+                                                                                                ),
+                                                                                                'response': serializeParam(
+                                                                                                  responseItem,
+                                                                                                  ParamType.Document,
+                                                                                                ),
+                                                                                              }.withoutNulls,
+                                                                                              extra: <String, dynamic>{
+                                                                                                'vacancy': vacancyVacanciesRecord,
+                                                                                                'response': responseItem,
+                                                                                              },
+                                                                                            );
                                                                                           },
-                                                                                        );
-                                                                                      },
-                                                                                      text: 'Пройти вводное интервью',
-                                                                                      options: FFButtonOptions(
-                                                                                        width: 260.0,
-                                                                                        height: 50.0,
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                                                                        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                        color: FlutterFlowTheme.of(context).primary,
-                                                                                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                              color: Colors.white,
-                                                                                              fontSize: 15.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w600,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                          text: 'Пройти вводное интервью',
+                                                                                          options: FFButtonOptions(
+                                                                                            width: 260.0,
+                                                                                            height: 50.0,
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                                            iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                            color: FlutterFlowTheme.of(context).primary,
+                                                                                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                                  color: Colors.white,
+                                                                                                  fontSize: 15.0,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                                ),
+                                                                                            elevation: 0.0,
+                                                                                            borderSide: BorderSide(
+                                                                                              color: Colors.transparent,
+                                                                                              width: 0.0,
                                                                                             ),
-                                                                                        elevation: 0.0,
-                                                                                        borderSide: BorderSide(
-                                                                                          color: Colors.transparent,
-                                                                                          width: 0.0,
+                                                                                            borderRadius: BorderRadius.circular(6.0),
+                                                                                          ),
                                                                                         ),
-                                                                                        borderRadius: BorderRadius.circular(6.0),
+                                                                                      ),
+                                                                                    Container(
+                                                                                      decoration: BoxDecoration(),
+                                                                                      child: Visibility(
+                                                                                        visible: (responseItem.status == 'Приглашение') && !vacancyVacanciesRecord.isDeleted && (responseItem.isInterviewDateSelected != true),
+                                                                                        child: Builder(
+                                                                                          builder: (context) => Padding(
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                                                                                            child: FFButtonWidget(
+                                                                                              onPressed: () async {
+                                                                                                _model.hr = await UsersRecord.getDocumentOnce(responseItem.hr!);
+                                                                                                await showDialog(
+                                                                                                  barrierColor: FlutterFlowTheme.of(context).modalBgnd,
+                                                                                                  context: context,
+                                                                                                  builder: (dialogContext) {
+                                                                                                    return Dialog(
+                                                                                                      elevation: 0,
+                                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                                      backgroundColor: Colors.transparent,
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                      child: GestureDetector(
+                                                                                                        onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                                        child: ApplicantCalendarWidget(
+                                                                                                          startDate: _model.hr!.availableDateStart!,
+                                                                                                          endDate: _model.hr!.availableDateEnd!,
+                                                                                                          morning: _model.hr!.availableMorningHours,
+                                                                                                          day: _model.hr!.availableDayHours,
+                                                                                                          evening: _model.hr!.availableEveningHours,
+                                                                                                          weekends: _model.hr!.weekends,
+                                                                                                          lockedDates: _model.hr?.lockedDates,
+                                                                                                          hr: _model.hr!.reference,
+                                                                                                          response: responseItem.reference,
+                                                                                                          vacancy: responseItem.vacancy,
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                ).then((value) => setState(() {}));
+
+                                                                                                setState(() {});
+                                                                                              },
+                                                                                              text: 'Выбрать дату интервью',
+                                                                                              options: FFButtonOptions(
+                                                                                                width: 260.0,
+                                                                                                height: 50.0,
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                                                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                color: FlutterFlowTheme.of(context).secondary,
+                                                                                                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                                      color: Colors.white,
+                                                                                                      fontSize: 15.0,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      fontWeight: FontWeight.w600,
+                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                                    ),
+                                                                                                elevation: 0.0,
+                                                                                                borderSide: BorderSide(
+                                                                                                  color: Colors.transparent,
+                                                                                                  width: 0.0,
+                                                                                                ),
+                                                                                                borderRadius: BorderRadius.circular(6.0),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
                                                                                       ),
                                                                                     ),
-                                                                                  ),
+                                                                                  ],
+                                                                                ),
                                                                               ],
                                                                             );
                                                                           },
@@ -1476,7 +1696,7 @@ class _MyResponsesWidgetState extends State<MyResponsesWidget>
                                                                   ),
                                                                 ).animateOnPageLoad(
                                                                   animationsMap[
-                                                                      'containerOnPageLoadAnimation6']!,
+                                                                      'containerOnPageLoadAnimation7']!,
                                                                   effects: [
                                                                     VisibilityEffect(
                                                                         duration: max(

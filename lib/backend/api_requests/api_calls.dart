@@ -105,6 +105,7 @@ class SendFileToGPTCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -136,6 +137,7 @@ class AnalyseChatCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -166,6 +168,7 @@ class ParseResumePDFFieldsByGPTCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -202,6 +205,7 @@ class GetCityPredictionsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -242,9 +246,37 @@ class GenerateVacancyCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
+}
+
+class CreateZoomLinkCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'createZoomLink',
+      apiUrl: 'https://api.fffq.ru/webhook/create-zoom-link',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? joinUrl(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].join_url''',
+      ));
+  static String? startUrl(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].start_url''',
+      ));
 }
 
 class ApiPagingParams {

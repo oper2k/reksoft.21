@@ -4,6 +4,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/main/burger_mobile/burger_mobile_widget.dart';
+import '/placeholders/notify_chat_placeholder/notify_chat_placeholder_widget.dart';
 import '/placeholders/notify_icon_placeholder/notify_icon_placeholder_widget.dart';
 import 'header_mobile_open_widget.dart' show HeaderMobileOpenWidget;
 import 'package:badges/badges.dart' as badges;

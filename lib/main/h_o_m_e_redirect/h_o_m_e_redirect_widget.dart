@@ -38,6 +38,7 @@ class _HOMERedirectWidgetState extends State<HOMERedirectWidget>
       FFAppState().chatHistory = jsonDecode('null');
       FFAppState().chatMessage = 0;
       setState(() {});
+      FFAppState().clearUserDocQueryCache();
       if (FFAppState().isDarkTheme) {
         setDarkModeSetting(context, ThemeMode.dark);
       } else {

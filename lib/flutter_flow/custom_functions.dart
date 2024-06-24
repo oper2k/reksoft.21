@@ -149,6 +149,54 @@ List<String> generateKeywords(List<String> textArray) {
   return keywords.toList();
 }
 
+List<String> generateHours(
+  List<String> morning,
+  List<String> day,
+  List<String> evening,
+) {
+  // Создаем пустой список для хранения результатов
+  List<String> hours = [];
+
+  // Добавляем утренние, дневные и вечерние часы в результирующий список
+  hours.addAll(morning);
+  hours.addAll(day);
+  hours.addAll(evening);
+
+  // Функция для преобразования строки в объект DateTime
+  DateTime parseTime(String time) {
+    return DateFormat('HH:mm').parse(time);
+  }
+
+  // Сортировка списка по времени
+  hours.sort((a, b) => parseTime(a).compareTo(parseTime(b)));
+
+  return hours;
+}
+
+List<String> generateHoursCopy(
+  List<String> morning,
+  List<String> day,
+  List<String> evening,
+) {
+  // Создаем пустой список для хранения результатов
+  List<String> hours = [];
+
+  // Добавляем утренние, дневные и вечерние часы в результирующий список
+  hours.addAll(morning);
+  hours.addAll(day);
+  hours.addAll(evening);
+
+  // Функция для преобразования строки в объект DateTime
+  DateTime parseTime(String time) {
+    return DateFormat('HH:mm').parse(time);
+  }
+
+  // Сортировка списка по времени
+  hours.sort((a, b) => parseTime(a).compareTo(parseTime(b)));
+
+  return hours;
+}
+
 String? convertStringToImagePath(String? url) {
   if (url == null || url.isEmpty) {
     return null;
@@ -172,4 +220,75 @@ DocumentReference? stringToDocReference(String? documentID) {
 List<VacanciesRecord> reverseListVacansion(
     List<VacanciesRecord> vacansionsList) {
   return vacansionsList.reversed.toList();
+}
+
+List<DocumentReference> returnUsersReferenceList(
+  DocumentReference userA,
+  DocumentReference userB,
+) {
+  return [userA, userB];
+}
+
+List<DateTime> generateDates(
+  DateTime? startDate,
+  DateTime? endDate,
+  List<String> weekends,
+) {
+  // Проверяем наличие начальной и конечной даты
+  if (startDate == null || endDate == null) {
+    return [];
+  }
+
+  // Устанавливаем время на 0:00 для начальной и конечной дат
+  startDate = DateTime(startDate.year, startDate.month, startDate.day);
+  endDate = DateTime(endDate.year, endDate.month, endDate.day);
+
+  // Инициализируем список для хранения дат
+  List<DateTime> dates = [];
+
+  // Функция для проверки, является ли день недели выходным
+  bool isWeekend(DateTime date) {
+    // Получаем строковое представление дня недели на русском
+    String dayOfWeek = DateFormat.E('ru').format(date);
+    // Преобразуем сокращенное представление дня недели в стандартное (Пн -> понедельник и т.д.)
+    switch (dayOfWeek) {
+      case 'пн':
+        dayOfWeek = 'Пн';
+        break;
+      case 'вт':
+        dayOfWeek = 'Вт';
+        break;
+      case 'ср':
+        dayOfWeek = 'Ср';
+        break;
+      case 'чт':
+        dayOfWeek = 'Чт';
+        break;
+      case 'пт':
+        dayOfWeek = 'Пт';
+        break;
+      case 'сб':
+        dayOfWeek = 'Сб';
+        break;
+      case 'вс':
+        dayOfWeek = 'Вс';
+        break;
+    }
+    // Проверяем, содержится ли день недели в списке выходных
+    return weekends.contains(dayOfWeek);
+  }
+
+  // Начинаем с начальной даты и добавляем по одному дню, пока не достигнем конечной даты
+  DateTime currentDate = startDate;
+  while (
+      currentDate.isBefore(endDate) || currentDate.isAtSameMomentAs(endDate)) {
+    // Если текущая дата не является выходным, добавляем её в список
+    if (!isWeekend(currentDate)) {
+      dates.add(currentDate);
+    }
+    // Добавляем один день
+    currentDate = currentDate.add(Duration(days: 1));
+  }
+
+  return dates;
 }

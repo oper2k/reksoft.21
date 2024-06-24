@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/applicant_calendar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,6 +13,7 @@ import '/placeholders/empty_responses_list/empty_responses_list_widget.dart';
 import 'dart:math';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'my_responses_widget.dart' show MyResponsesWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -30,6 +32,8 @@ class MyResponsesModel extends FlutterFlowModel<MyResponsesWidget> {
   late HeaderDesktopModel headerDesktopModel;
   // Model for HeaderMobileOpen component.
   late HeaderMobileOpenModel headerMobileOpenModel;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  UsersRecord? hr;
   // Model for Footer component.
   late FooterModel footerModel;
 

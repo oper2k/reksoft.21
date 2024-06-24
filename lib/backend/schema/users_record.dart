@@ -138,6 +138,56 @@ class UsersRecord extends FirestoreRecord {
       _responsedVacanciesList ?? const [];
   bool hasResponsedVacanciesList() => _responsedVacanciesList != null;
 
+  // "shortDescription" field.
+  String? _shortDescription;
+  String get shortDescription => _shortDescription ?? '';
+  bool hasShortDescription() => _shortDescription != null;
+
+  // "last_active_time" field.
+  DateTime? _lastActiveTime;
+  DateTime? get lastActiveTime => _lastActiveTime;
+  bool hasLastActiveTime() => _lastActiveTime != null;
+
+  // "title" field.
+  String? _title;
+  String get title => _title ?? '';
+  bool hasTitle() => _title != null;
+
+  // "availableDateStart" field.
+  DateTime? _availableDateStart;
+  DateTime? get availableDateStart => _availableDateStart;
+  bool hasAvailableDateStart() => _availableDateStart != null;
+
+  // "availableDateEnd" field.
+  DateTime? _availableDateEnd;
+  DateTime? get availableDateEnd => _availableDateEnd;
+  bool hasAvailableDateEnd() => _availableDateEnd != null;
+
+  // "availableMorningHours" field.
+  List<String>? _availableMorningHours;
+  List<String> get availableMorningHours => _availableMorningHours ?? const [];
+  bool hasAvailableMorningHours() => _availableMorningHours != null;
+
+  // "availableDayHours" field.
+  List<String>? _availableDayHours;
+  List<String> get availableDayHours => _availableDayHours ?? const [];
+  bool hasAvailableDayHours() => _availableDayHours != null;
+
+  // "availableEveningHours" field.
+  List<String>? _availableEveningHours;
+  List<String> get availableEveningHours => _availableEveningHours ?? const [];
+  bool hasAvailableEveningHours() => _availableEveningHours != null;
+
+  // "weekends" field.
+  List<String>? _weekends;
+  List<String> get weekends => _weekends ?? const [];
+  bool hasWeekends() => _weekends != null;
+
+  // "lockedDates" field.
+  List<AvailableDatesStruct>? _lockedDates;
+  List<AvailableDatesStruct> get lockedDates => _lockedDates ?? const [];
+  bool hasLockedDates() => _lockedDates != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -170,6 +220,19 @@ class UsersRecord extends FirestoreRecord {
     _chatSummary = snapshotData['chat_summary'] as String?;
     _responsedVacanciesList =
         getDataList(snapshotData['responsedVacanciesList']);
+    _shortDescription = snapshotData['shortDescription'] as String?;
+    _lastActiveTime = snapshotData['last_active_time'] as DateTime?;
+    _title = snapshotData['title'] as String?;
+    _availableDateStart = snapshotData['availableDateStart'] as DateTime?;
+    _availableDateEnd = snapshotData['availableDateEnd'] as DateTime?;
+    _availableMorningHours = getDataList(snapshotData['availableMorningHours']);
+    _availableDayHours = getDataList(snapshotData['availableDayHours']);
+    _availableEveningHours = getDataList(snapshotData['availableEveningHours']);
+    _weekends = getDataList(snapshotData['weekends']);
+    _lockedDates = getStructList(
+      snapshotData['lockedDates'],
+      AvailableDatesStruct.fromMap,
+    );
   }
 
   static CollectionReference get collection =>
@@ -226,6 +289,11 @@ Map<String, dynamic> createUsersRecordData({
   String? website,
   String? hrCompanyName,
   String? chatSummary,
+  String? shortDescription,
+  DateTime? lastActiveTime,
+  String? title,
+  DateTime? availableDateStart,
+  DateTime? availableDateEnd,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -249,6 +317,11 @@ Map<String, dynamic> createUsersRecordData({
       'website': website,
       'hr_companyName': hrCompanyName,
       'chat_summary': chatSummary,
+      'shortDescription': shortDescription,
+      'last_active_time': lastActiveTime,
+      'title': title,
+      'availableDateStart': availableDateStart,
+      'availableDateEnd': availableDateEnd,
     }.withoutNulls,
   );
 
@@ -285,7 +358,19 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.hrCompanyName == e2?.hrCompanyName &&
         e1?.chatSummary == e2?.chatSummary &&
         listEquality.equals(
-            e1?.responsedVacanciesList, e2?.responsedVacanciesList);
+            e1?.responsedVacanciesList, e2?.responsedVacanciesList) &&
+        e1?.shortDescription == e2?.shortDescription &&
+        e1?.lastActiveTime == e2?.lastActiveTime &&
+        e1?.title == e2?.title &&
+        e1?.availableDateStart == e2?.availableDateStart &&
+        e1?.availableDateEnd == e2?.availableDateEnd &&
+        listEquality.equals(
+            e1?.availableMorningHours, e2?.availableMorningHours) &&
+        listEquality.equals(e1?.availableDayHours, e2?.availableDayHours) &&
+        listEquality.equals(
+            e1?.availableEveningHours, e2?.availableEveningHours) &&
+        listEquality.equals(e1?.weekends, e2?.weekends) &&
+        listEquality.equals(e1?.lockedDates, e2?.lockedDates);
   }
 
   @override
@@ -313,7 +398,17 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.website,
         e?.hrCompanyName,
         e?.chatSummary,
-        e?.responsedVacanciesList
+        e?.responsedVacanciesList,
+        e?.shortDescription,
+        e?.lastActiveTime,
+        e?.title,
+        e?.availableDateStart,
+        e?.availableDateEnd,
+        e?.availableMorningHours,
+        e?.availableDayHours,
+        e?.availableEveningHours,
+        e?.weekends,
+        e?.lockedDates
       ]);
 
   @override
